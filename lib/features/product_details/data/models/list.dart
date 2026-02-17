@@ -1,4 +1,3 @@
-import 'package:rahek/product.dart';
 
 List<Product> products = [
   Product(
