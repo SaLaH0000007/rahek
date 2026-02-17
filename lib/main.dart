@@ -106,11 +106,26 @@ class _MyHomePageState extends State<MyHomePage> {
           // wireframe for each widget.
           mainAxisAlignment: .center,
           children: [
-            Image.asset(products[0].image),
+            Image.asset(products[_counter].image),
+            Text(products[_counter].name),
+            Text(products[_counter].description),
+            Text(products[_counter].price.toString()),
+            Text(products[_counter].rating.toString()),
+            Text(products[_counter].weight.toString()),
+            if (products[_counter].isFavorite)
+              const Text('Favorite')
+            else
+              const Text('Not Favorite'),
+
             const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+            Text('$_counter'),
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  _counter--;
+                });
+              },
+              child: Icon(Icons.minimize),
             ),
           ],
         ),

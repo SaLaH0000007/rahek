@@ -4,7 +4,7 @@ class Product {
   late final String image;
   late final double price;
   late final String description;
-  late final int weight;
+  late final List<int> weight;
   late final double rating;
   late final bool isFavorite = false;
 
@@ -15,6 +15,7 @@ class Product {
     required this.price,
     required this.description,
     required this.rating,
-    required this.weight,
+    this.weight = const [],
+    isFavorite = false,
   });
 }
