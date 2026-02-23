@@ -1,3 +1,4 @@
+import 'package:rahek/features/product_details/data/models/product.dart';
 
 List<Product> products = [
   Product(
