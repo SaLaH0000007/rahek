@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'core/theme/app_colors_light.dart';
+import 'features/home/presentation/bloc/bottom_navigation_cubit.dart';
 import 'features/product_details/presentation/bloc/product_details_cubit.dart';
 import 'features/home/presentation/ui/screens/main_layout_screen.dart';
 
@@ -18,6 +19,7 @@ class RahekApp extends StatelessWidget {
       providers: [
         // توفير الـ Cubit على مستوى التطبيق (أو الشاشة حسب احتياجك)
         BlocProvider(create: (context) => ProductNumberCubit()),
+        BlocProvider(create: (context) => BottomNavigationCubit()),
       ],
       child: MaterialApp(
         title: 'Rahek',
@@ -29,7 +31,7 @@ class RahekApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primary),
         ),
         // البداية هتكون من شاشة الـ Layout اللي فيها الـ Bottom Nav
-        home: const MainLayoutScreen(),
+        home: MainLayoutScreen(),
       ),
     );
   }
