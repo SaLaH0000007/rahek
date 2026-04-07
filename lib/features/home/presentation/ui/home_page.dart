@@ -2,16 +2,14 @@ import 'package:flutter/material.dart';
 import '../../../../sheredcomponent/custom_appbar.dart';
 
 class HoneyPage extends StatelessWidget {
-   HoneyPage({super.key});
-
+  HoneyPage({super.key});
 
   final List<String> imageList = [
-    "assets/images/image1.png",
-    "assets/images/image2.png",
-    "assets/images/image3.png",
-    "assets/images/image4.png",
+    "assets/images/Container1.png",
+    "assets/images/Container2.png",
+    "assets/images/Container2.png",
+    "assets/images/Container1.png",
   ];
-
 
   @override
   Widget build(BuildContext context) {
@@ -29,10 +27,10 @@ class HoneyPage extends StatelessWidget {
           print("Compare clicked");
         },
       ),
-
       body: SingleChildScrollView(
         child: Column(
           children: [
+            // 🔶 Banner
             Container(
               height: 150,
               width: double.infinity,
@@ -46,6 +44,7 @@ class HoneyPage extends StatelessWidget {
               ),
             ),
 
+            // 🔶 Offers
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -54,7 +53,10 @@ class HoneyPage extends StatelessWidget {
                 Image.asset("assets/images/Container2.png", height: 60),
               ],
             ),
+
             SizedBox(height: 10),
+
+            // 🔶 Title
             Text(
               "New Products",
               style: TextStyle(
@@ -64,6 +66,8 @@ class HoneyPage extends StatelessWidget {
             ),
 
             SizedBox(height: 5),
+
+            // 🔶 Filters
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -76,6 +80,8 @@ class HoneyPage extends StatelessWidget {
             ),
 
             SizedBox(height: 10),
+
+            // 🔶 Products Grid
             GridView.builder(
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
@@ -91,82 +97,35 @@ class HoneyPage extends StatelessWidget {
                 return productCard();
               },
             ),
-
-
-            Container(
+            GridView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: imageList.length,
               padding: EdgeInsets.all(10),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Container(
-                          height: 100,
-                          margin: EdgeInsets.all(5),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
-                            image: DecorationImage(
-                              image: AssetImage("assets/images/image1.png"),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Container(
-                          height: 100,
-                          margin: EdgeInsets.all(5),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
-                            image: DecorationImage(
-                              image: AssetImage("assets/images/image2.png"),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Container(
-                          height: 100,
-                          margin: EdgeInsets.all(5),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
-                            image: DecorationImage(
-                              image: AssetImage("assets/images/image3.png"),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Container(
-                          height: 100,
-                          margin: EdgeInsets.all(5),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
-                            image: DecorationImage(
-                              image: AssetImage("assets/images/image4.png"),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                childAspectRatio: 1.3,
               ),
+              itemBuilder: (context, index) {
+                return ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.asset(
+                    imageList[index],
+                    fit: BoxFit.cover,
+                    width: double.infinity,
+                    height: double.infinity,
+                  ),
+                );
+              },
             ),
-
           ],
         ),
       ),
     );
   }
-
+  // 🔶 Filter Button
   Widget filterButton(String text) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
@@ -179,6 +138,7 @@ class HoneyPage extends StatelessWidget {
     );
   }
 
+  // 🔶 Product Card
   Widget productCard() {
     return Container(
       padding: EdgeInsets.all(8),
@@ -202,9 +162,11 @@ class HoneyPage extends StatelessWidget {
                   right: 8,
                   child: Column(
                     children: [
-                      Icon(Icons.swap_horiz, color: Colors.blueGrey, size: 20),
+                      Icon(Icons.swap_horiz,
+                          color: Colors.blueGrey, size: 20),
                       SizedBox(height: 8),
-                      Icon(Icons.favorite_border, color: Colors.red, size: 20),
+                      Icon(Icons.favorite,
+                          color: Colors.red, size: 20),
                     ],
                   ),
                 ),
@@ -213,6 +175,7 @@ class HoneyPage extends StatelessWidget {
           ),
 
           SizedBox(height: 5),
+
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: List.generate(
@@ -226,7 +189,8 @@ class HoneyPage extends StatelessWidget {
 
           Text(
             "EGP 120.00",
-            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.orange),
+            style:
+            TextStyle(fontWeight: FontWeight.bold, color: Colors.orange),
           ),
 
           SizedBox(height: 5),
@@ -263,12 +227,13 @@ class HoneyPage extends StatelessWidget {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(Icons.shopping_cart, color: Colors.white, size: 16),
-                  // أيقونة الكارت
+                  Icon(Icons.shopping_cart,
+                      color: Colors.white, size: 16),
                   SizedBox(width: 5),
                   Text(
                     "Add to cart",
-                    style: TextStyle(color: Colors.white, fontSize: 12),
+                    style:
+                    TextStyle(color: Colors.white, fontSize: 12),
                   ),
                 ],
               ),
