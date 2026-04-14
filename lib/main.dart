@@ -17,7 +17,6 @@ class RahekApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        // توفير الـ Cubit على مستوى التطبيق (أو الشاشة حسب احتياجك)
         BlocProvider(create: (context) => ProductNumberCubit()),
         BlocProvider(create: (context) => BottomNavigationCubit()),
       ],
@@ -30,7 +29,6 @@ class RahekApp extends StatelessWidget {
           primaryColor: AppColors.primary,
           colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primary),
         ),
-        // البداية هتكون من شاشة الـ Layout اللي فيها الـ Bottom Nav
         home: MainLayoutScreen(),
       ),
     );
