@@ -1,52 +1,47 @@
+import 'package:rahek/features/product_details/data/models/product.dart';
+
 class CartItemModel {
-  final int productId;
-  final String name;
-  final String image;
-  final double price;
-  final int quantity; // الكمية
+  final Product product;
+  final int quantity;
+  final int selectedWeight;
+  final double itemSubtotal;
 
   CartItemModel({
-    required this.productId,
-    required this.name,
-    required this.image,
-    required this.price,
+    required this.product,
     required this.quantity,
+    required this.selectedWeight,
+    required this.itemSubtotal,
   });
-
-  // 1. الدالة دي مهمة جداً للـ Cubit عشان تزود أو تنقص الكمية جوه الـ UI
-  CartItemModel copyWith({
-    int? productId,
-    String? name,
-    String? image,
-    double? price,
-    int? quantity,
-  }) {
-    return CartItemModel(
-      productId: productId ?? this.productId,
-      name: name ?? this.name,
-      image: image ?? this.image,
-      price: price ?? this.price,
-      quantity: quantity ?? this.quantity,
-    );
-  }
-
+  // dio
   // factory CartItemModel.fromJson(Map<String, dynamic> json) {
   //   return CartItemModel(
-  //     productId: json['product_id'] ?? 0,
-  //     name: json['name'] ?? '',
-  //     image: json['image'] ?? '',
-  //     price: (json['price'] ?? 0).toDouble(),
+  //     product: Product.fromJson(json['product']),
   //     quantity: json['quantity'] ?? 1,
+  //     selectedWeight: json['selectedWeight'] ?? 0,
+  //     itemSubtotal: (json['itemSubtotal'] as num?)?.toDouble() ?? 0.0,
   //   );
   // }
   //
   // Map<String, dynamic> toJson() {
   //   return {
-  //     'product_id': productId,
-  //     'name': name,
-  //     'image': image,
-  //     'price': price,
+  //     'productId': product.id,
   //     'quantity': quantity,
+  //     'selectedWeight': selectedWeight,
+  //     'itemSubtotal': itemSubtotal,
   //   };
   // }
+
+  CartItemModel copyWith({
+    Product? product,
+    int? quantity,
+    int? selectedWeight,
+    double? itemSubtotal,
+  }) {
+    return CartItemModel(
+      product: product ?? this.product,
+      quantity: quantity ?? this.quantity,
+      selectedWeight: selectedWeight ?? this.selectedWeight,
+      itemSubtotal: itemSubtotal ?? this.itemSubtotal,
+    );
+  }
 }

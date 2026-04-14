@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rahek/features/cart/presentation/ui/cart_screen.dart';
 import '../../../../../core/theme/app_colors_light.dart';
 import '../../../../product_details/presentation/ui/product_details.dart';
 import '../../bloc/bottom_navigation_cubit.dart';
@@ -11,7 +12,7 @@ class MainLayoutScreen extends StatelessWidget {
   // دي لستة الشاشات اللي هتتعرض حسب التاب اللي اليوزر اختاره
   final List<Widget> _screens = [
     ProductDetailsScreen(productId: 4), // مؤقتاً هنحطها هي الرئيسية عشان تشوفها
-    Center(child: Text('Cart Screen')),
+    CartScreen(),
     Center(child: Text('Favorites Screen')),
     Center(child: Text('Profile Screen')),
   ];
@@ -41,11 +42,8 @@ class MainLayoutScreen extends StatelessWidget {
               onTap: BottomNavigationCubit.get(context).onPress,
               backgroundColor: AppColors.background,
               type: BottomNavigationBarType.fixed,
-              // مهم لو عندك أكتر من 3 تابات
               selectedItemColor: AppColors.primary,
-              // اللون لما التاب يكون متحدد
               unselectedItemColor: AppColors.textSecondary,
-              // اللون العادي
               showSelectedLabels: true,
               showUnselectedLabels: false,
               elevation: 0,
