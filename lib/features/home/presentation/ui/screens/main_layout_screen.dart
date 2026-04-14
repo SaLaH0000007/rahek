@@ -10,7 +10,7 @@ class MainLayoutScreen extends StatelessWidget {
 
   // دي لستة الشاشات اللي هتتعرض حسب التاب اللي اليوزر اختاره
   final List<Widget> _screens = [
-    ProductDetailsScreen(), // مؤقتاً هنحطها هي الرئيسية عشان تشوفها
+    ProductDetailsScreen(productId: 4), // مؤقتاً هنحطها هي الرئيسية عشان تشوفها
     Center(child: Text('Cart Screen')),
     Center(child: Text('Favorites Screen')),
     Center(child: Text('Profile Screen')),

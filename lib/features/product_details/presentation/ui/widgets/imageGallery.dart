@@ -4,7 +4,11 @@ import 'package:rahek/features/product_details/presentation/ui/widgets/thumbnail
 import '../../../../../core/theme/app_colors_light.dart';
 import '../../../../../core/theme/app_sizes.dart';
 
-Widget imageGallery() {
+Widget imageGallery({
+  required String imagePath,
+  required bool isFavorite,
+  required VoidCallback onFavoriteToggle,
+}) {
   return Column(
     children: [
       Container(
@@ -17,16 +21,22 @@ Widget imageGallery() {
         child: Stack(
           children: [
             Center(
-              child: Image.asset(
-                "assets/images/Apple_cider_vinegar.png",
-                errorBuilder: (context, error, stackTrace) {
-                  return const Icon(
-                    Icons.image,
-                    size: 80,
-                    color: AppColors.textSecondary,
-                  );
-                },
-              ),
+              child: imagePath.isNotEmpty
+                  ? Image.asset(
+                      imagePath,
+                      errorBuilder: (context, error, stackTrace) {
+                        return const Icon(
+                          Icons.image,
+                          size: 80,
+                          color: AppColors.textSecondary,
+                        );
+                      },
+                    )
+                  : const Icon(
+                      Icons.image,
+                      size: 80,
+                      color: AppColors.textSecondary,
+                    ),
             ),
             const Positioned(
               top: AppSizes.p12,
@@ -39,21 +49,27 @@ Widget imageGallery() {
                 ),
               ),
             ),
-            const Positioned(
-              top: AppSizes.p8,
-              right: AppSizes.p8,
+            Positioned(
+              top: 0,
+              right: 0,
               child: Column(
                 children: [
-                  Icon(
-                    Icons.share,
-                    color: AppColors.textSecondary,
-                    size: AppSizes.iconMedium,
+                  IconButton(
+                    icon: const Icon(
+                      Icons.share,
+                      color: AppColors.textSecondary,
+                    ),
+                    onPressed: () {},
                   ),
-                  SizedBox(height: AppSizes.p8),
-                  Icon(
-                    Icons.favorite_border,
-                    color: AppColors.textSecondary,
-                    size: AppSizes.iconMedium,
+                  // زرار المفضلة بقى ديناميك
+                  IconButton(
+                    icon: Icon(
+                      isFavorite ? Icons.favorite : Icons.favorite_border,
+                      color: isFavorite
+                          ? AppColors.primary
+                          : AppColors.textSecondary,
+                    ),
+                    onPressed: onFavoriteToggle,
                   ),
                 ],
               ),
@@ -83,7 +99,8 @@ Widget imageGallery() {
         ),
       ),
       const SizedBox(height: AppSizes.p8),
-      Row(children: [thumbnail(isActive: true)]),
+      // عرض الصورة المصغرة
+      Row(children: [thumbnail(isActive: true, imagePath: imagePath)]),
     ],
   );
 }

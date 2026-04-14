@@ -35,6 +35,7 @@ dependencies:
   bloc:
   google_fonts:
   shared_preferences:
+  dio:
 
 
   # The following adds the Cupertino Icons font to your application.

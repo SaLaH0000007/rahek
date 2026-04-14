@@ -1,13 +1,36 @@
-abstract class ProductNumberState {}
+import '../../data/models/product.dart';
 
-class ProductNumberInitialState extends ProductNumberState {}
+abstract class ProductDetailsState {}
 
-class ProductNumberIncrementState extends ProductNumberState {
-  final int counter;
-  ProductNumberIncrementState(this.counter);
+class ProductDetailsInitial extends ProductDetailsState {}
+
+class ProductDetailsLoading extends ProductDetailsState {}
+
+class ProductDetailsError extends ProductDetailsState {
+  final String message;
+  ProductDetailsError(this.message);
 }
 
-class ProductNumberDecrementState extends ProductNumberState {
-  final int counter;
-  ProductNumberDecrementState(this.counter);
+class ProductDetailsLoaded extends ProductDetailsState {
+  final Product product;
+  final int quantity;
+  final int selectedWeight;
+
+  ProductDetailsLoaded({
+    required this.product,
+    this.quantity = 1,
+    required this.selectedWeight,
+  });
+
+  ProductDetailsLoaded copyWith({
+    Product? product,
+    int? quantity,
+    int? selectedWeight,
+  }) {
+    return ProductDetailsLoaded(
+      product: product ?? this.product,
+      quantity: quantity ?? this.quantity,
+      selectedWeight: selectedWeight ?? this.selectedWeight,
+    );
+  }
 }

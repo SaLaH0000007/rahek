@@ -3,13 +3,22 @@ import 'package:flutter/material.dart';
 import '../../../../../core/theme/app_colors_light.dart';
 import '../../../../../core/theme/app_sizes.dart';
 
-Widget product_info() {
+Widget product_info({
+  required String name,
+  required double price,
+  required double rating,
+  required String description,
+  required int id,
+}) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      const Text(
-        'Apple vinegar',
-        style: TextStyle(fontSize: AppSizes.f22, fontWeight: FontWeight.bold),
+      Text(
+        name,
+        style: const TextStyle(
+          fontSize: AppSizes.f22,
+          fontWeight: FontWeight.bold,
+        ),
       ),
       const SizedBox(height: AppSizes.p4),
       Row(
@@ -18,9 +27,9 @@ Widget product_info() {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'SKU: 1',
-                style: TextStyle(
+              Text(
+                'SKU: $id',
+                style: const TextStyle(
                   color: AppColors.textSecondary,
                   fontSize: AppSizes.f12,
                 ),
@@ -47,11 +56,12 @@ Widget product_info() {
               ),
             ],
           ),
+          // ديناميكية التقييم (النجوم)
           Row(
             children: List.generate(
               5,
-              (index) => const Icon(
-                Icons.star_border,
+              (index) => Icon(
+                index < rating ? Icons.star : Icons.star_border,
                 color: AppColors.primary,
                 size: AppSizes.iconSmall,
               ),
@@ -62,19 +72,20 @@ Widget product_info() {
       const SizedBox(height: AppSizes.p16),
       Row(
         crossAxisAlignment: CrossAxisAlignment.end,
-        children: const [
+        children: [
           Text(
-            'EGP 150.00',
-            style: TextStyle(
+            'EGP $price',
+            style: const TextStyle(
               fontSize: AppSizes.f20,
               fontWeight: FontWeight.bold,
               color: AppColors.primary,
             ),
           ),
-          SizedBox(width: AppSizes.p8),
+          const SizedBox(width: AppSizes.p8),
+          // السعر القديم (ممكن نخليه السعر + 20% كمثال بما إن عندك خصم)
           Text(
-            'EGP 190.00',
-            style: TextStyle(
+            'EGP ${price + (price * 0.20)}',
+            style: const TextStyle(
               fontSize: AppSizes.f14,
               color: AppColors.textSecondary,
               decoration: TextDecoration.lineThrough,
@@ -83,9 +94,9 @@ Widget product_info() {
         ],
       ),
       const SizedBox(height: AppSizes.p16),
-      const Text(
-        'Apple cider vinegar ingredients:\nNatural apple juice - acidity regulator - acetic acid (less than 5%).',
-        style: TextStyle(
+      Text(
+        description,
+        style: const TextStyle(
           color: AppColors.textSecondary,
           fontSize: AppSizes.f13,
         ),

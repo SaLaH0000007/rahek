@@ -17,7 +17,7 @@ class RahekApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => ProductNumberCubit()),
+        BlocProvider(create: (context) => ProductDetailsCubit()),
         BlocProvider(create: (context) => BottomNavigationCubit()),
       ],
       child: MaterialApp(
