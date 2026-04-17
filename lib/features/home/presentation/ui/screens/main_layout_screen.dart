@@ -9,9 +9,8 @@ import '../../bloc/bottom_navigation_state.dart';
 class MainLayoutScreen extends StatelessWidget {
   MainLayoutScreen({super.key});
 
-  // دي لستة الشاشات اللي هتتعرض حسب التاب اللي اليوزر اختاره
   final List<Widget> _screens = [
-    ProductDetailsScreen(productId: 4), // مؤقتاً هنحطها هي الرئيسية عشان تشوفها
+    ProductDetailsScreen(productId: 1),
     CartScreen(),
     Center(child: Text('Favorites Screen')),
     Center(child: Text('Profile Screen')),

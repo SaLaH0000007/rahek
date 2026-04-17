@@ -10,6 +10,7 @@ import '../../../../../core/theme/app_colors_light.dart';
 import '../../../../../core/theme/app_sizes.dart';
 import '../../../../../core/widgets/primary_button.dart';
 import '../../../../../core/widgets/quantity_selector.dart';
+import '../../../cart/presentation/bloc/cart_cubit.dart';
 import '../bloc/product_details_cubit.dart';
 import '../bloc/product_details_state.dart';
 
@@ -87,7 +88,24 @@ class ProductDetailsScreen extends StatelessWidget {
                         Expanded(
                           child: PrimaryButton(
                             text: 'Add to cart',
-                            onPressed: () {},
+                            onPressed: () {
+                              context.read<CartCubit>().addToCart(
+                                product: product,
+                                quantity: state.quantity,
+                                selectedWeight: state.selectedWeight,
+                              );
+
+                              // Optional: Show a snackbar for feedback
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    '${product.name} added to cart',
+                                  ),
+                                  duration: const Duration(seconds: 2),
+                                  backgroundColor: AppColors.primary,
+                                ),
+                              );
+                            },
                           ),
                         ),
                         const SizedBox(width: AppSizes.p8),
