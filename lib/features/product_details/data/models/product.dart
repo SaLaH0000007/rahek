@@ -19,7 +19,6 @@ class Product {
     this.isFavorite = false,
   });
 
-  // لتحويل البيانات من Dio/JSON لاحقاً
   factory Product.fromJson(Map<String, dynamic> json) {
     return Product(
       id: json['id'],
@@ -33,7 +32,6 @@ class Product {
     );
   }
 
-  // لتحديث الحالة (مثل المفضلة) دون تغيير الكائن الأصلي
   Product copyWith({
     int? id,
     String? name,
