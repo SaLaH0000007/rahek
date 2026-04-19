@@ -54,7 +54,7 @@ List<Product> products = [
   Product(
     id: 9,
     name: "Date molasses",
-    image: "assets/images/Lemon_juice_250ml.png",
+    image: "assets/images/Date_molasses.png",
     price: 80,
     description:
         "Natural and concentrated date molasses is used in marinating meat and chicken, and can also be enjoyed as a delicious drink with milk to boost minerals, vitamins and energy in the body.",
@@ -64,7 +64,7 @@ List<Product> products = [
   Product(
     id: 11,
     name: "Dried molokhia",
-    image: "",
+    image: "assets/images/Dried_molokhia.png",
     price: 35,
     description:
         "Natural Dried Molokhia - Organic. Net weight: Approximately 150g. Preparation: Wash the dried molokhia thoroughly, then drain. In a pot over medium heat, add the oil, then add the garlic and sauté. Add the coriander, chicken or beef broth (as desired), and salt to the pot and bring to a boil for 10 minutes. Add the dried molokhia, stir well, and simmer over low heat until cooked through. Serve and enjoy!",
@@ -73,7 +73,7 @@ List<Product> products = [
   Product(
     id: 12,
     name: "Egyptian Mountain Sidr Honey (100% Natural)",
-    image: "image",
+    image: "assets/images/Egyptian_Mountain_Sidr_Honey.png",
     price: 550,
     description:
         "Egyptian Mountain Sidr Honey: High-quality Sidr honey is one of the best choices for liver, kidney, and heart health. It also promotes overall well-being, offering comprehensive and natural health benefits. Description: It is produced by bees feeding on the nectar of Sidr tree blossoms and mountain herbs in the mountains and southern Egypt. This honey contains, on average, more than 18 times the antioxidants found in regular honey.",
@@ -82,7 +82,7 @@ List<Product> products = [
   Product(
     id: 14,
     name: "extra virgin olive oil",
-    image: "image",
+    image: "assets/images/extra_virgin_olive_oil.png",
     price: 650,
     description:
         "This is considered one of the finest types of olive oil and is essential in your kitchen. It contains high levels of vitamins and antioxidants, and you can use it in your dishes as a substitute for harmful and refined oils. Uses: Add it to salads and all kinds of dishes to boost immunity and reduce the risk of chronic diseases. Regular consumption also helps to: protect the body from aging, inflammation, and the formation of cancerous cells; lower bad cholesterol and prevent blood clots; improve heart and brain health and protect against strokes; regulate blood sugar levels; promote healthy skin, hair, and bones; and prevent digestive problems and constipation.",
