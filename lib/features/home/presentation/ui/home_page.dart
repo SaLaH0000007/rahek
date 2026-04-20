@@ -14,17 +14,7 @@ class HoneyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-        onMenuPressed: () {
-          print("Menu clicked");
-        },
-        onSearchPressed: () {
-          print("Search clicked");
-        },
-        onComparePressed: () {
-          print("Compare clicked");
-        },
-      ),
+      appBar: CustomAppBar(),
       body: SingleChildScrollView(
         child: Column(
           children: [
