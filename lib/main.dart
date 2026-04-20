@@ -4,7 +4,7 @@ import 'core/theme/app_colors_light.dart';
 import 'core/widgets/bottom_navigation/bloc/bottom_navigation_cubit.dart';
 import 'features/cart/presentation/bloc/cart_cubit.dart';
 import 'features/product_details/presentation/bloc/product_details_cubit.dart';
-import 'core/widgets/bottom_navigation/main_layout_screen.dart';
+import 'core/widgets/bottom_navigation/ui/main_layout_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

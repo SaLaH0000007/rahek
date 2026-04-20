@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rahek/features/cart/presentation/ui/cart_screen.dart';
-import '../../theme/app_colors_light.dart';
-import '../../../features/product_details/presentation/ui/product_details.dart';
-import 'bloc/bottom_navigation_cubit.dart';
-import 'bloc/bottom_navigation_state.dart';
+import '../../../../features/home/presentation/ui/home_page.dart';
+import '../../../theme/app_colors_light.dart';
+import '../bloc/bottom_navigation_cubit.dart';
+import '../bloc/bottom_navigation_state.dart';
 
 class MainLayoutScreen extends StatelessWidget {
   MainLayoutScreen({super.key});
 
   final List<Widget> _screens = [
-    ProductDetailsScreen(productId: 1),
+    HoneyPage(),
     CartScreen(),
     Center(child: Text('Favorites Screen')),
     Center(child: Text('Profile Screen')),
