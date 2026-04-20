@@ -12,9 +12,9 @@ Widget location_and_weight({
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start, // يدعم RTL تلقائياً
     children: [
-      const SizedBox(height: AppSizes.p8),
+      SizedBox(height: AppSizes.p8),
       const Text('Weight', style: TextStyle(fontWeight: FontWeight.bold)),
-      const SizedBox(height: AppSizes.p4),
+      SizedBox(height: AppSizes.p4),
       Wrap(
         spacing: 8,
         children: weights

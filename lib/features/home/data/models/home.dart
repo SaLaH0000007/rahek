@@ -87,20 +87,34 @@ class HomeModel {
     success: json["success"],
     message: json["message"],
     defaultStoreId: json["defaultStoreId"],
-    allowedCurrencies: List<AllowedCurrency>.from(json["allowedCurrencies"].map((x) => AllowedCurrency.fromJson(x))),
+    allowedCurrencies: List<AllowedCurrency>.from(
+      json["allowedCurrencies"].map((x) => AllowedCurrency.fromJson(x)),
+    ),
     defaultCurrency: json["defaultCurrency"],
     showSwatchOnCollection: json["showSwatchOnCollection"],
     priceFormat: PriceFormat.fromJson(json["priceFormat"]),
     themeCode: json["themeCode"],
     bannerType: json["bannerType"],
     videoUrl: json["videoUrl"],
-    bannerImages: List<BannerImage>.from(json["bannerImages"].map((x) => BannerImage.fromJson(x))),
-    gallaryList: List<BannerImage>.from(json["gallaryList"].map((x) => BannerImage.fromJson(x))),
-    categories: List<CategoryElement>.from(json["categories"].map((x) => CategoryElement.fromJson(x))),
+    bannerImages: List<BannerImage>.from(
+      json["bannerImages"].map((x) => BannerImage.fromJson(x)),
+    ),
+    gallaryList: List<BannerImage>.from(
+      json["gallaryList"].map((x) => BannerImage.fromJson(x)),
+    ),
+    categories: List<CategoryElement>.from(
+      json["categories"].map((x) => CategoryElement.fromJson(x)),
+    ),
     wishlistEnable: json["wishlistEnable"],
-    featuredCategories: List<FeaturedCategory>.from(json["featuredCategories"].map((x) => FeaturedCategory.fromJson(x))),
-    storeData: List<Store>.from(json["storeData"].map((x) => Store.fromJson(x))),
-    carousel: List<Carousel>.from(json["carousel"].map((x) => Carousel.fromJson(x))),
+    featuredCategories: List<FeaturedCategory>.from(
+      json["featuredCategories"].map((x) => FeaturedCategory.fromJson(x)),
+    ),
+    storeData: List<Store>.from(
+      json["storeData"].map((x) => Store.fromJson(x)),
+    ),
+    carousel: List<Carousel>.from(
+      json["carousel"].map((x) => Carousel.fromJson(x)),
+    ),
     customerName: json["customerName"],
     customerEmail: json["customerEmail"],
     cartCount: json["cartCount"],
@@ -108,16 +122,24 @@ class HomeModel {
     bannerDominantColor: json["bannerDominantColor"],
     customerProfileImage: json["customerProfileImage"],
     customerDominantColor: json["customerDominantColor"],
-    cmsData: List<CmsDatum>.from(json["cmsData"].map((x) => CmsDatum.fromJson(x))),
+    cmsData: List<CmsDatum>.from(
+      json["cmsData"].map((x) => CmsDatum.fromJson(x)),
+    ),
     eTag: json["eTag"],
     sliderTimer: json["slider_timer"],
-    partners: List<Partner>.from(json["partners"].map((x) => Partner.fromJson(x))),
+    partners: List<Partner>.from(
+      json["partners"].map((x) => Partner.fromJson(x)),
+    ),
     flashDeals: List<dynamic>.from(json["flashDeals"].map((x) => x)),
     ads: List<Ad>.from(json["ads"].map((x) => Ad.fromJson(x))),
-    promotions: List<Promotion>.from(json["promotions"].map((x) => Promotion.fromJson(x))),
+    promotions: List<Promotion>.from(
+      json["promotions"].map((x) => Promotion.fromJson(x)),
+    ),
     titles: Titles.fromJson(json["titles"]),
     homeSeo: HomeSeo.fromJson(json["homeSEO"]),
-    headerContent: List<HeaderContent>.from(json["headerContent"].map((x) => HeaderContent.fromJson(x))),
+    headerContent: List<HeaderContent>.from(
+      json["headerContent"].map((x) => HeaderContent.fromJson(x)),
+    ),
     industry: json["industry"],
   );
 
@@ -125,7 +147,9 @@ class HomeModel {
     "success": success,
     "message": message,
     "defaultStoreId": defaultStoreId,
-    "allowedCurrencies": List<dynamic>.from(allowedCurrencies.map((x) => x.toJson())),
+    "allowedCurrencies": List<dynamic>.from(
+      allowedCurrencies.map((x) => x.toJson()),
+    ),
     "defaultCurrency": defaultCurrency,
     "showSwatchOnCollection": showSwatchOnCollection,
     "priceFormat": priceFormat.toJson(),
@@ -136,7 +160,9 @@ class HomeModel {
     "gallaryList": List<dynamic>.from(gallaryList.map((x) => x.toJson())),
     "categories": List<dynamic>.from(categories.map((x) => x.toJson())),
     "wishlistEnable": wishlistEnable,
-    "featuredCategories": List<dynamic>.from(featuredCategories.map((x) => x.toJson())),
+    "featuredCategories": List<dynamic>.from(
+      featuredCategories.map((x) => x.toJson()),
+    ),
     "storeData": List<dynamic>.from(storeData.map((x) => x.toJson())),
     "carousel": List<dynamic>.from(carousel.map((x) => x.toJson())),
     "customerName": customerName,
@@ -209,12 +235,13 @@ class AllowedCurrency {
     required this.code,
   });
 
-  factory AllowedCurrency.fromJson(Map<String, dynamic> json) => AllowedCurrency(
-    id: json["id"],
-    label: json["label"],
-    symbol: json["symbol"],
-    code: json["code"],
-  );
+  factory AllowedCurrency.fromJson(Map<String, dynamic> json) =>
+      AllowedCurrency(
+        id: json["id"],
+        label: json["label"],
+        symbol: json["symbol"],
+        code: json["code"],
+      );
 
   Map<String, dynamic> toJson() => {
     "id": id,
@@ -269,11 +296,7 @@ class RedirectData {
   String? url;
   int id;
 
-  RedirectData({
-    required this.type,
-    this.url,
-    required this.id,
-  });
+  RedirectData({required this.type, this.url, required this.id});
 
   factory RedirectData.fromJson(Map<String, dynamic> json) => RedirectData(
     type: typeValues.map[json["type"]]!,
@@ -288,16 +311,12 @@ class RedirectData {
   };
 }
 
-enum Type {
-  CATEGORY,
-  EXTERNAL,
-  PRODUCT
-}
+enum Type { CATEGORY, EXTERNAL, PRODUCT }
 
 final typeValues = EnumValues({
   "category": Type.CATEGORY,
   "external": Type.EXTERNAL,
-  "product": Type.PRODUCT
+  "product": Type.PRODUCT,
 });
 
 class Carousel {
@@ -326,7 +345,9 @@ class Carousel {
     color: json["color"],
     image: json["image"],
     dominantColor: json["dominantColor"],
-    productList: List<CarouselProductList>.from(json["productList"].map((x) => CarouselProductList.fromJson(x))),
+    productList: List<CarouselProductList>.from(
+      json["productList"].map((x) => CarouselProductList.fromJson(x)),
+    ),
   );
 
   Map<String, dynamic> toJson() => {
@@ -407,39 +428,44 @@ class CarouselProductList {
     required this.isAllowedGuestCheckout,
   });
 
-  factory CarouselProductList.fromJson(Map<String, dynamic> json) => CarouselProductList(
-    configurableData: List<dynamic>.from(json["configurableData"].map((x) => x)),
-    isInWishlist: json["isInWishlist"],
-    wishlistItemId: json["wishlistItemId"],
-    typeId: typeIdValues.map[json["typeId"]]!,
-    entityId: json["entityId"],
-    shortDescription: json["shortDescription"],
-    rating: json["rating"],
-    availability: json["availability"],
-    isAvailable: json["isAvailable"],
-    variation: List<dynamic>.from(json["variation"].map((x) => x)),
-    price: json["price"],
-    formattedPrice: json["formattedPrice"],
-    finalPrice: json["finalPrice"],
-    formattedFinalPrice: json["formattedFinalPrice"],
-    specialPrice: json["specialPrice"]?.toDouble(),
-    formatedSpecialPrice: json["formatedSpecialPrice"],
-    convertedSpecialPrice: json["convertedSpecialPrice"],
-    formatedConvertedSpecialPrice: json["formatedConvertedSpecialPrice"],
-    name: json["name"],
-    hasRequiredOptions: json["hasRequiredOptions"],
-    isNew: json["isNew"],
-    isInRange: json["isInRange"],
-    thumbNail: json["thumbNail"],
-    minAddToCartQty: json["minAddToCartQty"],
-    negotiable: json["negotiable"],
-    negotiableLabel: json["negotiable_label"],
-    orderMinQuantity: json["order_min_quantity"],
-    orderMaxQuantity: json["order_max_quantity"],
-    position: json["position"],
-    imageGallery: List<ImageGallery>.from(json["imageGallery"].map((x) => ImageGallery.fromJson(x))),
-    isAllowedGuestCheckout: json["isAllowedGuestCheckout"],
-  );
+  factory CarouselProductList.fromJson(Map<String, dynamic> json) =>
+      CarouselProductList(
+        configurableData: List<dynamic>.from(
+          json["configurableData"].map((x) => x),
+        ),
+        isInWishlist: json["isInWishlist"],
+        wishlistItemId: json["wishlistItemId"],
+        typeId: typeIdValues.map[json["typeId"]]!,
+        entityId: json["entityId"],
+        shortDescription: json["shortDescription"],
+        rating: json["rating"],
+        availability: json["availability"],
+        isAvailable: json["isAvailable"],
+        variation: List<dynamic>.from(json["variation"].map((x) => x)),
+        price: json["price"],
+        formattedPrice: json["formattedPrice"],
+        finalPrice: json["finalPrice"],
+        formattedFinalPrice: json["formattedFinalPrice"],
+        specialPrice: json["specialPrice"]?.toDouble(),
+        formatedSpecialPrice: json["formatedSpecialPrice"],
+        convertedSpecialPrice: json["convertedSpecialPrice"],
+        formatedConvertedSpecialPrice: json["formatedConvertedSpecialPrice"],
+        name: json["name"],
+        hasRequiredOptions: json["hasRequiredOptions"],
+        isNew: json["isNew"],
+        isInRange: json["isInRange"],
+        thumbNail: json["thumbNail"],
+        minAddToCartQty: json["minAddToCartQty"],
+        negotiable: json["negotiable"],
+        negotiableLabel: json["negotiable_label"],
+        orderMinQuantity: json["order_min_quantity"],
+        orderMaxQuantity: json["order_max_quantity"],
+        position: json["position"],
+        imageGallery: List<ImageGallery>.from(
+          json["imageGallery"].map((x) => ImageGallery.fromJson(x)),
+        ),
+        isAllowedGuestCheckout: json["isAllowedGuestCheckout"],
+      );
 
   Map<String, dynamic> toJson() => {
     "configurableData": List<dynamic>.from(configurableData.map((x) => x)),
@@ -504,16 +530,12 @@ class ImageGallery {
   };
 }
 
-enum TypeId {
-  CONFIGURABLE,
-  SIMPLE,
-  VIRTUAL
-}
+enum TypeId { CONFIGURABLE, SIMPLE, VIRTUAL }
 
 final typeIdValues = EnumValues({
   "configurable": TypeId.CONFIGURABLE,
   "simple": TypeId.SIMPLE,
-  "virtual": TypeId.VIRTUAL
+  "virtual": TypeId.VIRTUAL,
 });
 
 class CategoryElement {
@@ -535,15 +557,16 @@ class CategoryElement {
     required this.bannerDominantColor,
   });
 
-  factory CategoryElement.fromJson(Map<String, dynamic> json) => CategoryElement(
-    id: json["id"],
-    name: json["name"],
-    hasChildren: json["hasChildren"],
-    thumbnail: json["thumbnail"],
-    thumbnailDominantColor: json["thumbnailDominantColor"],
-    banner: json["banner"],
-    bannerDominantColor: json["bannerDominantColor"],
-  );
+  factory CategoryElement.fromJson(Map<String, dynamic> json) =>
+      CategoryElement(
+        id: json["id"],
+        name: json["name"],
+        hasChildren: json["hasChildren"],
+        thumbnail: json["thumbnail"],
+        thumbnailDominantColor: json["thumbnailDominantColor"],
+        banner: json["banner"],
+        bannerDominantColor: json["bannerDominantColor"],
+      );
 
   Map<String, dynamic> toJson() => {
     "id": id,
@@ -560,20 +583,12 @@ class CmsDatum {
   int id;
   String title;
 
-  CmsDatum({
-    required this.id,
-    required this.title,
-  });
+  CmsDatum({required this.id, required this.title});
 
-  factory CmsDatum.fromJson(Map<String, dynamic> json) => CmsDatum(
-    id: json["id"],
-    title: json["title"],
-  );
+  factory CmsDatum.fromJson(Map<String, dynamic> json) =>
+      CmsDatum(id: json["id"], title: json["title"]);
 
-  Map<String, dynamic> toJson() => {
-    "id": id,
-    "title": title,
-  };
+  Map<String, dynamic> toJson() => {"id": id, "title": title};
 }
 
 class FeaturedCategory {
@@ -591,13 +606,18 @@ class FeaturedCategory {
     required this.productList,
   });
 
-  factory FeaturedCategory.fromJson(Map<String, dynamic> json) => FeaturedCategory(
-    imageUrl: json["image_url"],
-    dominantColor: json["dominantColor"],
-    categoryId: json["categoryId"],
-    categoryName: json["categoryName"],
-    productList: List<FeaturedCategoryProductList>.from(json["productList"].map((x) => FeaturedCategoryProductList.fromJson(x))),
-  );
+  factory FeaturedCategory.fromJson(Map<String, dynamic> json) =>
+      FeaturedCategory(
+        imageUrl: json["image_url"],
+        dominantColor: json["dominantColor"],
+        categoryId: json["categoryId"],
+        categoryName: json["categoryName"],
+        productList: List<FeaturedCategoryProductList>.from(
+          json["productList"].map(
+            (x) => FeaturedCategoryProductList.fromJson(x),
+          ),
+        ),
+      );
 
   Map<String, dynamic> toJson() => {
     "image_url": imageUrl,
@@ -675,39 +695,42 @@ class FeaturedCategoryProductList {
     required this.isAllowedGuestCheckout,
   });
 
-  factory FeaturedCategoryProductList.fromJson(Map<String, dynamic> json) => FeaturedCategoryProductList(
-    configurableData: List<dynamic>.from(json["configurableData"].map((x) => x)),
-    isInWishlist: json["isInWishlist"],
-    wishlistItemId: json["wishlistItemId"],
-    typeId: typeIdValues.map[json["typeId"]]!,
-    entityId: json["entityId"],
-    shortDescription: json["shortDescription"],
-    rating: json["rating"],
-    availability: json["availability"],
-    isAvailable: json["isAvailable"],
-    variation: List<dynamic>.from(json["variation"].map((x) => x)),
-    price: json["price"],
-    formattedPrice: json["formattedPrice"],
-    finalPrice: json["finalPrice"],
-    formattedFinalPrice: json["formattedFinalPrice"],
-    specialPrice: json["specialPrice"]?.toDouble(),
-    formatedSpecialPrice: json["formatedSpecialPrice"],
-    convertedSpecialPrice: json["convertedSpecialPrice"],
-    formatedConvertedSpecialPrice: json["formatedConvertedSpecialPrice"],
-    name: json["name"],
-    hasRequiredOptions: json["hasRequiredOptions"],
-    isNew: json["isNew"],
-    isInRange: json["isInRange"],
-    thumbNail: json["thumbNail"],
-    minAddToCartQty: json["minAddToCartQty"],
-    negotiable: json["negotiable"],
-    negotiableLabel: json["negotiable_label"],
-    orderMinQuantity: json["order_min_quantity"],
-    orderMaxQuantity: json["order_max_quantity"],
-    position: json["position"],
-    imageGallery: List<dynamic>.from(json["imageGallery"].map((x) => x)),
-    isAllowedGuestCheckout: json["isAllowedGuestCheckout"],
-  );
+  factory FeaturedCategoryProductList.fromJson(Map<String, dynamic> json) =>
+      FeaturedCategoryProductList(
+        configurableData: List<dynamic>.from(
+          json["configurableData"].map((x) => x),
+        ),
+        isInWishlist: json["isInWishlist"],
+        wishlistItemId: json["wishlistItemId"],
+        typeId: typeIdValues.map[json["typeId"]]!,
+        entityId: json["entityId"],
+        shortDescription: json["shortDescription"],
+        rating: json["rating"],
+        availability: json["availability"],
+        isAvailable: json["isAvailable"],
+        variation: List<dynamic>.from(json["variation"].map((x) => x)),
+        price: json["price"],
+        formattedPrice: json["formattedPrice"],
+        finalPrice: json["finalPrice"],
+        formattedFinalPrice: json["formattedFinalPrice"],
+        specialPrice: json["specialPrice"]?.toDouble(),
+        formatedSpecialPrice: json["formatedSpecialPrice"],
+        convertedSpecialPrice: json["convertedSpecialPrice"],
+        formatedConvertedSpecialPrice: json["formatedConvertedSpecialPrice"],
+        name: json["name"],
+        hasRequiredOptions: json["hasRequiredOptions"],
+        isNew: json["isNew"],
+        isInRange: json["isInRange"],
+        thumbNail: json["thumbNail"],
+        minAddToCartQty: json["minAddToCartQty"],
+        negotiable: json["negotiable"],
+        negotiableLabel: json["negotiable_label"],
+        orderMinQuantity: json["order_min_quantity"],
+        orderMaxQuantity: json["order_max_quantity"],
+        position: json["position"],
+        imageGallery: List<dynamic>.from(json["imageGallery"].map((x) => x)),
+        isAllowedGuestCheckout: json["isAllowedGuestCheckout"],
+      );
 
   Map<String, dynamic> toJson() => {
     "configurableData": List<dynamic>.from(configurableData.map((x) => x)),
@@ -900,13 +923,9 @@ class Partner {
   };
 }
 
-enum Locale {
-  AR_EN
-}
+enum Locale { AR_EN }
 
-final localeValues = EnumValues({
-  "ar,en": Locale.AR_EN
-});
+final localeValues = EnumValues({"ar,en": Locale.AR_EN});
 
 class PriceFormat {
   String pattern;
@@ -953,23 +972,12 @@ class Promotion {
   String head;
   String desc;
 
-  Promotion({
-    required this.icon,
-    required this.head,
-    required this.desc,
-  });
+  Promotion({required this.icon, required this.head, required this.desc});
 
-  factory Promotion.fromJson(Map<String, dynamic> json) => Promotion(
-    icon: json["icon"],
-    head: json["head"],
-    desc: json["desc"],
-  );
+  factory Promotion.fromJson(Map<String, dynamic> json) =>
+      Promotion(icon: json["icon"], head: json["head"], desc: json["desc"]);
 
-  Map<String, dynamic> toJson() => {
-    "icon": icon,
-    "head": head,
-    "desc": desc,
-  };
+  Map<String, dynamic> toJson() => {"icon": icon, "head": head, "desc": desc};
 }
 
 class Store {
@@ -991,7 +999,9 @@ class Store {
     id: json["id"],
     name: json["name"],
     code: json["code"],
-    stores: json["stores"] == null ? [] : List<Store>.from(json["stores"]!.map((x) => Store.fromJson(x))),
+    stores: json["stores"] == null
+        ? []
+        : List<Store>.from(json["stores"]!.map((x) => Store.fromJson(x))),
     localeId: json["locale_id"],
   );
 
@@ -999,7 +1009,9 @@ class Store {
     "id": id,
     "name": name,
     "code": code,
-    "stores": stores == null ? [] : List<dynamic>.from(stores!.map((x) => x.toJson())),
+    "stores": stores == null
+        ? []
+        : List<dynamic>.from(stores!.map((x) => x.toJson())),
     "locale_id": localeId,
   };
 }

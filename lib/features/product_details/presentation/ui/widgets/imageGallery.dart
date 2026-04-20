@@ -38,7 +38,7 @@ Widget imageGallery({
                       color: AppColors.textSecondary,
                     ),
             ),
-            const Positioned(
+            Positioned(
               top: AppSizes.p12,
               left: AppSizes.p12,
               child: Text(
@@ -80,12 +80,12 @@ Widget imageGallery({
               right: 0,
               child: Center(
                 child: Container(
-                  padding: const EdgeInsets.symmetric(
+                  padding: EdgeInsets.symmetric(
                     horizontal: AppSizes.p16,
                     vertical: AppSizes.p4,
                   ),
                   color: Colors.black54,
-                  child: const Text(
+                  child: Text(
                     'Tap to zoom',
                     style: TextStyle(
                       color: AppColors.background,
@@ -98,8 +98,7 @@ Widget imageGallery({
           ],
         ),
       ),
-      const SizedBox(height: AppSizes.p8),
-      // عرض الصورة المصغرة
+      SizedBox(height: AppSizes.p8),
       Row(children: [thumbnail(isActive: true, imagePath: imagePath)]),
     ],
   );

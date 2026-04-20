@@ -4,12 +4,14 @@ import '../theme/app_sizes.dart';
 import 'icon_bottun.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+  final bool isMenuOpen;
   final VoidCallback? onMenuPressed;
   final VoidCallback? onSearchPressed;
   final VoidCallback? onComparePressed;
 
   const CustomAppBar({
     super.key,
+    this.isMenuOpen = false,
     this.onMenuPressed,
     this.onSearchPressed,
     this.onComparePressed,
@@ -29,11 +31,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              customIconButton(Icons.menu, onMenuPressed),
-              const SizedBox(width: AppSizes.p16),
-              customIconButton(Icons.swap_horiz, onComparePressed),
-              const SizedBox(width: AppSizes.p16),
-              customIconButton(Icons.search, onSearchPressed),
+              customIconButton(
+                icon: isMenuOpen ? Icons.close : Icons.menu,
+                onTap: onMenuPressed,
+              ),
+              SizedBox(width: AppSizes.p16),
+              customIconButton(icon: Icons.swap_horiz, onTap: onComparePressed),
+              SizedBox(width: AppSizes.p16),
+              customIconButton(icon: Icons.search, onTap: onSearchPressed),
             ],
           ),
 

@@ -35,7 +35,7 @@ class CartItemWidget extends StatelessWidget {
               ),
               child: Image.asset(item.product.image, fit: BoxFit.cover),
             ),
-            const SizedBox(width: AppSizes.p16),
+            SizedBox(width: AppSizes.p16),
 
             Expanded(
               child: Column(
@@ -46,22 +46,22 @@ class CartItemWidget extends StatelessWidget {
                       GestureDetector(
                         onTap: onRemove,
                         child: Container(
-                          padding: const EdgeInsets.all(AppSizes.p4),
+                          padding: EdgeInsets.all(AppSizes.p4),
                           decoration: const BoxDecoration(
                             color: AppColors.iconBackground,
                             shape: BoxShape.circle,
                           ),
-                          child: const Icon(
+                          child: Icon(
                             Icons.close,
                             size: AppSizes.icon14,
                             color: AppColors.textPrimary,
                           ),
                         ),
                       ),
-                      const SizedBox(width: AppSizes.p8),
+                      SizedBox(width: AppSizes.p8),
                       Text(
                         '${item.selectedWeight} gram',
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: AppSizes.f14,
                           color: AppColors.textPrimary,
@@ -69,26 +69,26 @@ class CartItemWidget extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: AppSizes.p8),
+                  SizedBox(height: AppSizes.p8),
                   OutlinedButton.icon(
                     style: OutlinedButton.styleFrom(
                       side: const BorderSide(color: AppColors.border),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(AppSizes.r4),
                       ),
-                      padding: const EdgeInsets.symmetric(
+                      padding: EdgeInsets.symmetric(
                         horizontal: AppSizes.p12,
                         vertical: AppSizes.O,
                       ),
-                      minimumSize: const Size(AppSizes.O, AppSizes.s32),
+                      minimumSize: Size(AppSizes.O, AppSizes.s32),
                     ),
                     onPressed: () {},
-                    icon: const Icon(
+                    icon: Icon(
                       Icons.bookmark_border,
                       size: AppSizes.iconSmall,
                       color: AppColors.textPrimary,
                     ),
-                    label: const Text(
+                    label: Text(
                       'Save for Later',
                       style: TextStyle(
                         color: AppColors.textPrimary,
@@ -101,10 +101,10 @@ class CartItemWidget extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: AppSizes.p16),
+        SizedBox(height: AppSizes.p16),
 
         _buildInfoRow('Price', 'EGP ${item.product.price.toStringAsFixed(2)}'),
-        const SizedBox(height: AppSizes.p12),
+        SizedBox(height: AppSizes.p12),
 
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -123,7 +123,7 @@ class CartItemWidget extends StatelessWidget {
                 children: [
                   InkWell(
                     onTap: onDecrement,
-                    child: const Padding(
+                    child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: AppSizes.p12),
                       child: Text(
                         '–',
@@ -137,9 +137,7 @@ class CartItemWidget extends StatelessWidget {
                   ),
                   Container(width: 1, color: AppColors.border),
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: AppSizes.p16,
-                    ),
+                    padding: EdgeInsets.symmetric(horizontal: AppSizes.p16),
                     child: Text(
                       '${item.quantity}',
                       style: const TextStyle(
@@ -151,7 +149,7 @@ class CartItemWidget extends StatelessWidget {
                   Container(width: 1, color: AppColors.border),
                   InkWell(
                     onTap: onIncrement,
-                    child: const Padding(
+                    child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: AppSizes.p12),
                       child: Text(
                         '+',
@@ -168,7 +166,7 @@ class CartItemWidget extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: AppSizes.p12),
+        SizedBox(height: AppSizes.p12),
 
         // Product subtotal
         _buildInfoRow(

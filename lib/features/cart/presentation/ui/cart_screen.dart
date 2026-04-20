@@ -3,6 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rahek/core/widgets/custom_appbar.dart';
 import '../../../../core/theme/app_sizes.dart';
 import '../../../../core/theme/app_colors_light.dart';
+import '../../../../core/widgets/menu/bloc/menu_cubit.dart';
+import '../../../../core/widgets/menu/bloc/menu_state.dart';
+import '../../../../core/widgets/menu/ui/menu_wrapper.dart';
 import '../bloc/cart_cubit.dart';
 import '../bloc/cart_state.dart';
 import 'widgets/cart_item_widget.dart';
@@ -13,86 +16,84 @@ class CartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.background,
-      appBar: CustomAppBar(),
-      body: BlocBuilder<CartCubit, CartState>(
-        builder: (context, state) {
-          if (state is CartLoading) {
-            return const Center(
-              child: CircularProgressIndicator(color: AppColors.primary),
-            );
-          }
+    return BlocBuilder<MenuCubit, MenuState>(
+      builder: (context, menuState) {
+        final menuCubit = MenuCubit.get(context);
 
-          if (state is CartLoaded) {
-            if (state.items.isEmpty) {
-              return _buildEmptyCart(context);
-            }
+        return Scaffold(
+          backgroundColor: AppColors.background,
+          appBar: CustomAppBar(
+            isMenuOpen: menuCubit.isMenuOpen,
+            onMenuPressed: () => menuCubit.toggleMenu(),
+          ),
+          body: MenuWrapper(
+            child: BlocBuilder<CartCubit, CartState>(
+              builder: (context, state) {
+                if (state is CartLoading) {
+                  return const Center(
+                    child: CircularProgressIndicator(color: AppColors.primary),
+                  );
+                }
 
-            return SingleChildScrollView(
-              padding: const EdgeInsets.all(AppSizes.p16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // 1. Top navigation bar (Breadcrumbs)
-                  _buildBreadcrumbs(),
-                  const SizedBox(height: AppSizes.p24),
+                if (state is CartLoaded) {
+                  if (state.items.isEmpty) return _buildEmptyCart(context);
 
-                  // 2. List of products in the cart
-                  ListView.separated(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: state.items.length,
-                    separatorBuilder: (context, index) => const Divider(
-                      height: AppSizes.p32,
-                      color: AppColors.border,
+                  return SingleChildScrollView(
+                    padding: EdgeInsets.all(AppSizes.p16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _buildBreadcrumbs(),
+                        SizedBox(height: AppSizes.p24),
+                        ListView.separated(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: state.items.length,
+                          separatorBuilder: (context, index) => Divider(
+                            height: AppSizes.p32,
+                            color: AppColors.border,
+                          ),
+                          itemBuilder: (context, index) {
+                            final item = state.items[index];
+                            return CartItemWidget(
+                              item: item,
+                              onIncrement: () =>
+                                  CartCubit.get(context).incrementItem(index),
+                              onDecrement: () =>
+                                  CartCubit.get(context).decrementItem(index),
+                              onRemove: () =>
+                                  CartCubit.get(context).removeItem(index),
+                            );
+                          },
+                        ),
+                        SizedBox(height: AppSizes.p24),
+                        _buildCartActionButtons(context),
+                        SizedBox(height: AppSizes.p32),
+                        _buildCouponSection(),
+                        SizedBox(height: AppSizes.p32),
+                        CartSummaryWidget(
+                          subTotal: state.subTotal,
+                          shippingCost: state.shippingCost,
+                          total: state.total,
+                          onCheckout: () {},
+                        ),
+                      ],
                     ),
-                    itemBuilder: (context, index) {
-                      final item = state.items[index];
-                      return CartItemWidget(
-                        item: item,
-                        onIncrement: () =>
-                            CartCubit.get(context).incrementItem(index),
-                        onDecrement: () =>
-                            CartCubit.get(context).decrementItem(index),
-                        onRemove: () =>
-                            CartCubit.get(context).removeItem(index),
-                      );
-                    },
-                  ),
-                  const SizedBox(height: AppSizes.p24),
+                  );
+                }
 
-                  // 3. Buttons (Continue Shopping / Clear Cart)
-                  _buildCartActionButtons(context),
-                  const SizedBox(height: AppSizes.p32),
-
-                  // 4. Discount Coupon
-                  _buildCouponSection(),
-                  const SizedBox(height: AppSizes.p32),
-
-                  // 5. Invoice Summary
-                  CartSummaryWidget(
-                    subTotal: state.subTotal,
-                    shippingCost: state.shippingCost,
-                    total: state.total,
-                    onCheckout: () {
-                      // TODO: Navigate to checkout screen
-                    },
-                  ),
-                ],
-              ),
-            );
-          }
-
-          return const SizedBox();
-        },
-      ),
+                return const SizedBox();
+              },
+            ),
+          ),
+        );
+      },
     );
   }
 
   Widget _buildBreadcrumbs() {
     return Row(
-      children: const [
+      children: [
         Text(
           'Shopping Cart',
           style: TextStyle(
@@ -153,7 +154,7 @@ class CartScreen extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: AppSizes.p12),
+        SizedBox(height: AppSizes.p12),
         SizedBox(
           width: double.infinity,
           height: AppSizes.buttonHeight,
@@ -182,7 +183,7 @@ class CartScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           'Coupon Discount',
           style: TextStyle(
             fontWeight: FontWeight.bold,
@@ -190,15 +191,15 @@ class CartScreen extends StatelessWidget {
             color: AppColors.textPrimary,
           ),
         ),
-        const SizedBox(height: AppSizes.p12),
+        SizedBox(height: AppSizes.p12),
         TextField(
           decoration: InputDecoration(
             hintText: 'Enter coupon code here...',
-            hintStyle: const TextStyle(
+            hintStyle: TextStyle(
               color: AppColors.textSecondary,
               fontSize: AppSizes.f14,
             ),
-            contentPadding: const EdgeInsets.symmetric(
+            contentPadding: EdgeInsets.symmetric(
               horizontal: AppSizes.p16,
               vertical: AppSizes.p14,
             ),
@@ -212,7 +213,7 @@ class CartScreen extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: AppSizes.p12),
+        SizedBox(height: AppSizes.p12),
         SizedBox(
           width: double.infinity,
           height: AppSizes.buttonHeight,
@@ -242,20 +243,20 @@ class CartScreen extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Icon(
+          Icon(
             Icons.shopping_cart_outlined,
             size: AppSizes.s80,
             color: AppColors.textSecondary,
           ),
-          const SizedBox(height: AppSizes.p16),
-          const Text(
+          SizedBox(height: AppSizes.p16),
+          Text(
             'Your cart is currently empty.',
             style: TextStyle(
               fontSize: AppSizes.f18,
               color: AppColors.textSecondary,
             ),
           ),
-          const SizedBox(height: AppSizes.p24),
+          SizedBox(height: AppSizes.p24),
           ElevatedButton(
             style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary),
             onPressed: () => Navigator.pushNamed(context, '/'),

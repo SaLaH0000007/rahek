@@ -24,14 +24,11 @@ class FeatureListTile extends StatelessWidget {
       ),
       title: Text(
         title,
-        style: const TextStyle(
-          fontSize: AppSizes.f13,
-          fontWeight: FontWeight.bold,
-        ),
+        style: TextStyle(fontSize: AppSizes.f13, fontWeight: FontWeight.bold),
       ),
       subtitle: Text(
         subtitle,
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: AppSizes.f11,
           color: AppColors.textSecondary,
         ),

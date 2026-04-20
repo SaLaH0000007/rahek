@@ -15,12 +15,9 @@ Widget product_info({
     children: [
       Text(
         name,
-        style: const TextStyle(
-          fontSize: AppSizes.f22,
-          fontWeight: FontWeight.bold,
-        ),
+        style: TextStyle(fontSize: AppSizes.f22, fontWeight: FontWeight.bold),
       ),
-      const SizedBox(height: AppSizes.p4),
+      SizedBox(height: AppSizes.p4),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -29,12 +26,12 @@ Widget product_info({
             children: [
               Text(
                 'SKU: $id',
-                style: const TextStyle(
+                style: TextStyle(
                   color: AppColors.textSecondary,
                   fontSize: AppSizes.f12,
                 ),
               ),
-              const Text(
+              Text(
                 'In Stock',
                 style: TextStyle(
                   color: AppColors.success,
@@ -42,7 +39,7 @@ Widget product_info({
                 ),
               ),
               Row(
-                children: const [
+                children: [
                   Text(
                     'Share: ',
                     style: TextStyle(
@@ -69,23 +66,22 @@ Widget product_info({
           ),
         ],
       ),
-      const SizedBox(height: AppSizes.p16),
+      SizedBox(height: AppSizes.p16),
       Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Text(
             'EGP $price',
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: AppSizes.f20,
               fontWeight: FontWeight.bold,
               color: AppColors.primary,
             ),
           ),
-          const SizedBox(width: AppSizes.p8),
-          // السعر القديم (ممكن نخليه السعر + 20% كمثال بما إن عندك خصم)
+          SizedBox(width: AppSizes.p8),
           Text(
             'EGP ${price + (price * 0.20)}',
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: AppSizes.f14,
               color: AppColors.textSecondary,
               decoration: TextDecoration.lineThrough,
@@ -93,10 +89,10 @@ Widget product_info({
           ),
         ],
       ),
-      const SizedBox(height: AppSizes.p16),
+      SizedBox(height: AppSizes.p16),
       Text(
         description,
-        style: const TextStyle(
+        style: TextStyle(
           color: AppColors.textSecondary,
           fontSize: AppSizes.f13,
         ),

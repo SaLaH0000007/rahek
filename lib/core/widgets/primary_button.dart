@@ -23,7 +23,7 @@ class PrimaryButton extends StatelessWidget {
         onPressed: onPressed,
         child: Text(
           text,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: AppSizes.f13,
             color: AppColors.background,
             fontWeight: FontWeight.bold,

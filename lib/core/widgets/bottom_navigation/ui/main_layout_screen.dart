@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rahek/features/cart/presentation/ui/cart_screen.dart';
+import '../../../../features/cart/presentation/bloc/cart_cubit.dart';
+import '../../../../features/cart/presentation/bloc/cart_state.dart';
 import '../../../../features/home/presentation/ui/home_navigator.dart';
 import '../../../theme/app_colors_light.dart';
-import '../../../theme/app_sizes.dart'; // Make sure to import AppSizes
+import '../../../theme/app_sizes.dart';
+import '../../menu/bloc/menu_cubit.dart';
 import '../bloc/bottom_navigation_cubit.dart';
 import '../bloc/bottom_navigation_state.dart';
 
@@ -19,55 +22,79 @@ class MainLayoutScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (BuildContext context) => BottomNavigationCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => BottomNavigationCubit()),
+        BlocProvider(create: (context) => MenuCubit()),
+      ],
       child: BlocConsumer<BottomNavigationCubit, BottomNavigationState>(
         builder: (context, state) => Scaffold(
           body: IndexedStack(
             index: BottomNavigationCubit.get(context).currentIndex,
             children: _screens,
           ),
-          bottomNavigationBar: SafeArea(
-            child: SizedBox(
-              height: AppSizes.bottomNavigationBarHeight,
-              child: BottomNavigationBar(
-                backgroundColor: AppColors.primary,
-                type: BottomNavigationBarType.fixed,
-                elevation:
-                    AppSizes.O, // Removed shadow for a flat look like the image
-                // Hide labels completely
-                showSelectedLabels: false,
-                showUnselectedLabels: false,
+          bottomNavigationBar: SizedBox(
+            height: AppSizes.bottomNavigationBarHeight,
+            child: BlocBuilder<CartCubit, CartState>(
+              builder: (context, cartState) {
+                // Calculate total quantity of items in cart
+                int cartItemsCount = 0;
+                if (cartState is CartLoaded) {
+                  for (var item in cartState.items) {
+                    cartItemsCount += item.quantity;
+                  }
+                }
 
-                // Unselected icons color (Solid White)
-                unselectedItemColor: AppColors.background,
-
-                currentIndex: BottomNavigationCubit.get(context).currentIndex,
-                onTap: BottomNavigationCubit.get(context).onPress,
-
-                items: [
-                  BottomNavigationBarItem(
-                    icon: const Icon(Icons.home_outlined),
-                    activeIcon: _buildActiveIcon(Icons.home),
-                    label: "Home", // Label is required but won't show
-                  ),
-                  BottomNavigationBarItem(
-                    icon: const Icon(Icons.shopping_cart_outlined),
-                    activeIcon: _buildActiveIcon(Icons.shopping_cart),
-                    label: "Cart",
-                  ),
-                  BottomNavigationBarItem(
-                    icon: const Icon(Icons.favorite_border),
-                    activeIcon: _buildActiveIcon(Icons.favorite),
-                    label: "Favorites",
-                  ),
-                  BottomNavigationBarItem(
-                    icon: const Icon(Icons.person_outline),
-                    activeIcon: _buildActiveIcon(Icons.person),
-                    label: "Profile",
-                  ),
-                ],
-              ),
+                return BottomNavigationBar(
+                  backgroundColor: AppColors.primary,
+                  selectedItemColor: AppColors.background,
+                  unselectedItemColor: AppColors.background,
+                  currentIndex: BottomNavigationCubit.get(context).currentIndex,
+                  onTap: BottomNavigationCubit.get(context).onPress,
+                  type: BottomNavigationBarType.fixed,
+                  showSelectedLabels: false,
+                  showUnselectedLabels: false,
+                  elevation: AppSizes.O,
+                  items: [
+                    BottomNavigationBarItem(
+                      icon: const Icon(Icons.home_outlined),
+                      activeIcon: _buildActiveIcon(Icons.home),
+                      label: "Home",
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Badge(
+                        isLabelVisible: cartItemsCount > 0,
+                        label: Text(
+                          '$cartItemsCount',
+                          style: const TextStyle(color: AppColors.primary),
+                        ),
+                        backgroundColor: AppColors.background,
+                        child: const Icon(Icons.shopping_cart_outlined),
+                      ),
+                      activeIcon: Badge(
+                        isLabelVisible: cartItemsCount > 0,
+                        label: Text(
+                          '$cartItemsCount',
+                          style: const TextStyle(color: AppColors.background),
+                        ),
+                        backgroundColor: AppColors.error,
+                        child: _buildActiveIcon(Icons.shopping_cart),
+                      ),
+                      label: "Cart",
+                    ),
+                    BottomNavigationBarItem(
+                      icon: const Icon(Icons.favorite_border),
+                      activeIcon: _buildActiveIcon(Icons.favorite),
+                      label: "Favorites",
+                    ),
+                    BottomNavigationBarItem(
+                      icon: const Icon(Icons.person_outline),
+                      activeIcon: _buildActiveIcon(Icons.person),
+                      label: "Profile",
+                    ),
+                  ],
+                );
+              },
             ),
           ),
         ),
@@ -76,21 +103,14 @@ class MainLayoutScreen extends StatelessWidget {
     );
   }
 
-  // Helper widget to draw the white circle around the selected icon
   Widget _buildActiveIcon(IconData icon) {
     return Container(
-      padding: const EdgeInsets.all(
-        AppSizes.p8,
-      ), // Adjust padding to control circle size
+      padding: EdgeInsets.all(AppSizes.p4),
       decoration: const BoxDecoration(
-        color: AppColors.background, // White circle
+        color: AppColors.background,
         shape: BoxShape.circle,
       ),
-      child: Icon(
-        icon,
-        color: AppColors.primary, // Orange icon inside the circle
-        size: AppSizes.iconMedium,
-      ),
+      child: Icon(icon, color: AppColors.primary, size: AppSizes.iconMedium),
     );
   }
 }

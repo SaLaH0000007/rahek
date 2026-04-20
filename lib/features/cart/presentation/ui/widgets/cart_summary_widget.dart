@@ -19,7 +19,7 @@ class CartSummaryWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(AppSizes.p16),
+      padding: EdgeInsets.all(AppSizes.p16),
       decoration: BoxDecoration(
         color: AppColors.background,
         border: Border.all(color: AppColors.border),
@@ -28,7 +28,7 @@ class CartSummaryWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          Text(
             'CART TOTALS',
             style: TextStyle(
               fontWeight: FontWeight.bold,
@@ -36,14 +36,14 @@ class CartSummaryWidget extends StatelessWidget {
               color: AppColors.textPrimary,
             ),
           ),
-          const SizedBox(height: AppSizes.p24),
+          SizedBox(height: AppSizes.p24),
 
           _buildSummaryRow(
             'Subtotal',
             'EGP ${subTotal.toStringAsFixed(2)}',
             isBoldRight: true,
           ),
-          const Padding(
+          Padding(
             padding: EdgeInsets.symmetric(vertical: AppSizes.p12),
             child: Divider(color: AppColors.border, height: 1),
           ),
@@ -52,13 +52,13 @@ class CartSummaryWidget extends StatelessWidget {
             'Shipping',
             'EGP\n${shippingCost.toStringAsFixed(2)}',
           ),
-          const Padding(
+          Padding(
             padding: EdgeInsets.symmetric(vertical: AppSizes.p12),
             child: Divider(color: AppColors.border, height: 1),
           ),
 
           _buildSummaryRow('Tax', 'EGP 0.00'),
-          const Padding(
+          Padding(
             padding: EdgeInsets.symmetric(vertical: AppSizes.p12),
             child: Divider(color: AppColors.border, height: 1),
           ),
@@ -66,7 +66,7 @@ class CartSummaryWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
+              Text(
                 'Total',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
@@ -76,7 +76,7 @@ class CartSummaryWidget extends StatelessWidget {
               ),
               Text(
                 'EGP ${total.toStringAsFixed(2)}',
-                style: const TextStyle(
+                style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: AppSizes.f18,
                   color: AppColors.primary,
@@ -84,7 +84,7 @@ class CartSummaryWidget extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: AppSizes.p24),
+          SizedBox(height: AppSizes.p24),
 
           SizedBox(
             width: double.infinity,

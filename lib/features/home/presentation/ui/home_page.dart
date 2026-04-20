@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rahek/features/home/presentation/ui/screens/widgets/side_menu_widget.dart';
 import '../../../../core/shared/list.dart';
 import '../../../../core/widgets/custom_appbar.dart';
 import '../../../../core/theme/app_colors_light.dart';
 import '../../../../core/theme/app_sizes.dart';
+import '../../../../core/widgets/icon_bottun.dart';
+import '../../../../core/widgets/menu/bloc/menu_cubit.dart';
+import '../../../../core/widgets/menu/bloc/menu_state.dart';
+import '../../../../core/widgets/menu/ui/menu_wrapper.dart';
 import '../../../cart/presentation/bloc/cart_cubit.dart';
 import '../../../product_details/data/models/product.dart';
-import '../../../product_details/presentation/ui/product_details.dart';
+import '../bloc/home_cubit.dart';
+import '../bloc/home_state.dart';
 
 class HoneyPage extends StatelessWidget {
   HoneyPage({super.key});
@@ -19,121 +26,95 @@ class HoneyPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.background,
-      appBar: const CustomAppBar(),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            // Banner
-            Container(
-              height: 150.0,
-              width: double.infinity,
-              margin: const EdgeInsets.all(AppSizes.p12),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(AppSizes.r12),
-                image: const DecorationImage(
-                  image: AssetImage("assets/images/img.png"),
-                  fit: BoxFit.cover,
-                ),
+    return BlocBuilder<MenuCubit, MenuState>(
+      builder: (context, menuState) {
+        final menuCubit = MenuCubit.get(context);
+
+        return Scaffold(
+          backgroundColor: AppColors.background,
+          appBar: CustomAppBar(
+            isMenuOpen: menuCubit.isMenuOpen,
+            onMenuPressed: () => menuCubit.toggleMenu(),
+          ),
+          body: MenuWrapper(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  _buildBanner(),
+                  _buildQuickOffers(),
+                  SizedBox(height: AppSizes.p12),
+                  _buildSectionTitle("New Products"),
+                  SizedBox(height: AppSizes.p8),
+                  _buildFilters(),
+                  SizedBox(height: AppSizes.p12),
+                  _buildProductGrid(context, HomeCubit.get(context)),
+                  _buildSecondaryBanners(),
+                ],
               ),
             ),
+          ),
+        );
+      },
+    );
+  }
 
-            // Offers
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  "assets/images/Container1.png",
-                  height: AppSizes.s60,
-                ),
-                const SizedBox(width: AppSizes.p12),
-                Image.asset(
-                  "assets/images/Container2.png",
-                  height: AppSizes.s60,
-                ),
-              ],
-            ),
-
-            const SizedBox(height: AppSizes.p12),
-
-            // Title
-            const Text(
-              "New Products",
-              style: TextStyle(
-                fontSize: AppSizes.f18,
-                fontWeight: FontWeight.bold,
-                color: AppColors.textPrimary,
-              ),
-            ),
-
-            const SizedBox(height: AppSizes.p8),
-
-            // Filters
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                filterButton("New Products"),
-                const SizedBox(width: AppSizes.p8),
-                filterButton("Final Sale"),
-                const SizedBox(width: AppSizes.p8),
-                filterButton("Top Sales"),
-              ],
-            ),
-
-            const SizedBox(height: AppSizes.p12),
-
-            // Products Grid
-            GridView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: products.length,
-              padding: const EdgeInsets.all(AppSizes.p12),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 0.55,
-                crossAxisSpacing: AppSizes.p12,
-                mainAxisSpacing: AppSizes.p12,
-              ),
-              itemBuilder: (context, index) {
-                final product = products[index];
-                return _buildProductCard(context, product);
-              },
-            ),
-
-            GridView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: imageList.length,
-              padding: const EdgeInsets.all(AppSizes.p12),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: AppSizes.p12,
-                mainAxisSpacing: AppSizes.p12,
-                childAspectRatio: 1.3,
-              ),
-              itemBuilder: (context, index) {
-                return ClipRRect(
-                  borderRadius: BorderRadius.circular(AppSizes.r12),
-                  child: Image.asset(
-                    imageList[index],
-                    fit: BoxFit.cover,
-                    width: double.infinity,
-                    height: double.infinity,
-                  ),
-                );
-              },
-            ),
-          ],
+  // Section: Main Promotional Banner
+  Widget _buildBanner() {
+    return Container(
+      height: 150.0,
+      width: double.infinity,
+      margin: EdgeInsets.all(AppSizes.p12),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(AppSizes.r12),
+        image: const DecorationImage(
+          image: AssetImage("assets/images/img.png"),
+          fit: BoxFit.cover,
         ),
       ),
     );
   }
 
-  // Filter Button
-  Widget filterButton(String text) {
+  // Section: Quick Offer Images
+  Widget _buildQuickOffers() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Image.asset("assets/images/Container1.png", height: AppSizes.s60),
+        SizedBox(width: AppSizes.p12),
+        Image.asset("assets/images/Container2.png", height: AppSizes.s60),
+      ],
+    );
+  }
+
+  // Section: Section Titles
+  Widget _buildSectionTitle(String title) {
+    return Text(
+      title,
+      style: TextStyle(
+        fontSize: AppSizes.f18,
+        fontWeight: FontWeight.bold,
+        color: AppColors.textPrimary,
+      ),
+    );
+  }
+
+  // Section: Category Filters
+  Widget _buildFilters() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        _filterButton("New Products"),
+        SizedBox(width: AppSizes.p8),
+        _filterButton("Final Sale"),
+        SizedBox(width: AppSizes.p8),
+        _filterButton("Top Sales"),
+      ],
+    );
+  }
+
+  Widget _filterButton(String text) {
     return Container(
-      padding: const EdgeInsets.symmetric(
+      padding: EdgeInsets.symmetric(
         horizontal: AppSizes.p12,
         vertical: AppSizes.p8,
       ),
@@ -144,20 +125,47 @@ class HoneyPage extends StatelessWidget {
       ),
       child: Text(
         text,
-        style: const TextStyle(
-          fontSize: AppSizes.f12,
-          color: AppColors.textPrimary,
-        ),
+        style: TextStyle(fontSize: AppSizes.f12, color: AppColors.textPrimary),
       ),
     );
   }
 
-  // Product Card
+  // Section: Dynamic Product Grid from list.dart
+  Widget _buildProductGrid(BuildContext context, HomeCubit cubit) {
+    int getCrossAxisCount(BuildContext context) {
+      double screenWidth = MediaQuery.of(context).size.width;
+      if (screenWidth > 800) return 4;
+      if (screenWidth > 600) return 3;
+      return 2;
+    }
 
-  Widget _buildProductCard(BuildContext context, Product product) {
+    return GridView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: products.length,
+      padding: EdgeInsets.all(AppSizes.p12),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: getCrossAxisCount(context),
+        childAspectRatio: 0.55,
+        crossAxisSpacing: AppSizes.p12,
+        mainAxisSpacing: AppSizes.p12,
+      ),
+      itemBuilder: (context, index) {
+        return _buildProductCard(context, products[index], cubit);
+      },
+    );
+  }
+
+  // Section: Individual Product Card Widget
+  Widget _buildProductCard(
+    BuildContext context,
+    Product product,
+    HomeCubit cubit,
+  ) {
+    final isFav = cubit.favoriteProductIds.contains(product.id);
+
     return GestureDetector(
       onTap: () {
-        // الانتقال لصفحة التفاصيل مع تمرير الـ id الحقيقي بتاع المنتج
         Navigator.of(context).pushNamed('/details', arguments: product.id);
       },
       child: Container(
@@ -176,34 +184,32 @@ class HoneyPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // الجزء العلوي: الصورة والأيقونات
             Expanded(
               child: Stack(
                 children: [
-                  // 👈 صورة المنتج الحقيقية من اللستة
                   Center(
                     child: Padding(
-                      padding: const EdgeInsets.all(AppSizes.p16),
+                      padding: EdgeInsets.all(AppSizes.p16),
                       child: Image.asset(product.image, fit: BoxFit.contain),
                     ),
                   ),
-                  // الأيقونات اللي على اليمين فوق
                   Positioned(
                     top: AppSizes.p8,
                     right: AppSizes.p8,
                     child: Column(
-                      children: const [
+                      children: [
                         Icon(
                           Icons.swap_horiz,
                           color: AppColors.textSecondary,
                           size: AppSizes.icon20,
                         ),
                         SizedBox(height: AppSizes.p12),
-                        Icon(
-                          Icons
-                              .favorite_border, // خليتها بوردر عشان تكون زي الصورة
-                          color: AppColors.textSecondary,
-                          size: AppSizes.icon20,
+                        customIconButton(
+                          color: isFav
+                              ? AppColors.primary
+                              : AppColors.textSecondary,
+                          icon: Icons.favorite,
+                          onTap: () => cubit.toggleFavorite(product.id),
                         ),
                       ],
                     ),
@@ -211,14 +217,11 @@ class HoneyPage extends StatelessWidget {
                 ],
               ),
             ),
-
-            // التقييم
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(
                 5,
                 (index) => Icon(
-                  // 👈 منطق بسيط لعرض النجوم المليانة والفاضية بناءً على التقييم
                   index < product.rating.floor()
                       ? Icons.star
                       : Icons.star_border,
@@ -227,37 +230,33 @@ class HoneyPage extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: AppSizes.p8),
-
-            // الأسعار والخصم
+            SizedBox(height: AppSizes.p8),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AppSizes.p12),
+              padding: EdgeInsets.symmetric(horizontal: AppSizes.p12),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // 👈 السعر الحقيقي
                   Text(
                     "EGP ${product.price.toStringAsFixed(2)}",
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: AppColors.primary,
                       fontSize: AppSizes.f16,
                     ),
                   ),
-                  const SizedBox(height: AppSizes.p2),
-                  // (سعر وهمي قبل الخصم - لأن الموديل بتاعك مفيهوش السعر القديم)
+                  SizedBox(height: AppSizes.p2),
                   Text(
                     "EGP ${(product.price + 30).toStringAsFixed(2)}",
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontWeight: FontWeight.w600,
                       color: AppColors.textSecondary,
                       decoration: TextDecoration.lineThrough,
                       fontSize: AppSizes.f12,
                     ),
                   ),
-                  const SizedBox(height: AppSizes.p2),
-                  const Text(
-                    "20% off", // (نسبة وهمية برضه لنفس السبب)
+                  SizedBox(height: AppSizes.p2),
+                  Text(
+                    "20% off",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: AppColors.textSecondary,
@@ -267,37 +266,30 @@ class HoneyPage extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: AppSizes.p12),
-
-            // 👈 زر إضافة للسلة المربوط بالـ Cubit
+            SizedBox(height: AppSizes.p12),
             InkWell(
               onTap: () {
-                // 1. تحديد الوزن الافتراضي (أول وزن في اللستة أو 0 لو مفيش أوزان)
                 final int defaultWeight =
                     (product.weight != null && product.weight!.isNotEmpty)
                     ? product.weight!.first
                     : 0;
-
-                // 2. استدعاء دالة الإضافة من الـ CartCubit
                 CartCubit.get(context).addToCart(
                   product: product,
-                  quantity: 1, // الكمية الافتراضية 1 من الصفحة الرئيسية
+                  quantity: 1,
                   selectedWeight: defaultWeight,
                 );
-
-                // 3. إظهار رسالة للمستخدم إن المنتج اتضاف بنجاح
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text('${product.name} added to cart!'),
-                    backgroundColor: AppColors.success, // لون أخضر أو برتقالي
+                    backgroundColor: AppColors.success,
                     duration: const Duration(seconds: 2),
                   ),
                 );
               },
               child: Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(vertical: AppSizes.p12),
-                decoration: const BoxDecoration(
+                padding: EdgeInsets.symmetric(vertical: AppSizes.p12),
+                decoration: BoxDecoration(
                   color: AppColors.primary,
                   borderRadius: BorderRadius.vertical(
                     bottom: Radius.circular(AppSizes.r8),
@@ -305,7 +297,7 @@ class HoneyPage extends StatelessWidget {
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
+                  children: [
                     Icon(
                       Icons.shopping_cart,
                       color: AppColors.background,
@@ -327,6 +319,33 @@ class HoneyPage extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  // Section: Bottom Banners Grid
+  Widget _buildSecondaryBanners() {
+    return GridView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: imageList.length,
+      padding: EdgeInsets.all(AppSizes.p12),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: AppSizes.p12,
+        mainAxisSpacing: AppSizes.p12,
+        childAspectRatio: 1.3,
+      ),
+      itemBuilder: (context, index) {
+        return ClipRRect(
+          borderRadius: BorderRadius.circular(AppSizes.r12),
+          child: Image.asset(
+            imageList[index],
+            fit: BoxFit.cover,
+            width: double.infinity,
+            height: double.infinity,
+          ),
+        );
+      },
     );
   }
 }

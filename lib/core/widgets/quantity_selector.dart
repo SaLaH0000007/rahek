@@ -17,7 +17,7 @@ class QuantitySelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(
+      padding: EdgeInsets.symmetric(
         horizontal: AppSizes.p12,
         vertical: AppSizes.p8,
       ),
@@ -30,19 +30,19 @@ class QuantitySelector extends StatelessWidget {
         children: [
           Text(
             '$quantity',
-            style: const TextStyle(
+            style: TextStyle(
               color: AppColors.primary,
               fontWeight: FontWeight.bold,
               fontSize: AppSizes.f18,
             ),
           ),
-          const SizedBox(width: AppSizes.p12),
+          SizedBox(width: AppSizes.p12),
           _buildIconBtn(
             Icons.remove,
             quantity > 1 ? AppColors.primary : AppColors.textSecondary,
             onDecrement,
           ),
-          const SizedBox(width: AppSizes.p8),
+          SizedBox(width: AppSizes.p8),
           _buildIconBtn(Icons.add, AppColors.primary, onIncrement),
         ],
       ),

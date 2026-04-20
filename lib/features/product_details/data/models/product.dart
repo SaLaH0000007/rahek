@@ -6,7 +6,7 @@ class Product {
   final String description;
   final List<int> weight;
   final double rating;
-  final bool isFavorite;
+  bool isFavorite;
 
   Product({
     required this.id,
