@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'core/theme/app_colors_light.dart';
+import 'core/widgets/bottom_navigation/bloc/bottom_navigation_cubit.dart';
 import 'features/cart/presentation/bloc/cart_cubit.dart';
-import 'features/home/presentation/bloc/bottom_navigation_cubit.dart';
 import 'features/product_details/presentation/bloc/product_details_cubit.dart';
 import 'core/widgets/bottom_navigation/main_layout_screen.dart';
 
