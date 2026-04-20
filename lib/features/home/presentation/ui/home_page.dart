@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../../sheredcomponent/custom_appbar.dart';
+import '../../../../core/widgets/custom_appbar.dart';
 
 class HoneyPage extends StatelessWidget {
   HoneyPage({super.key});
@@ -11,15 +11,10 @@ class HoneyPage extends StatelessWidget {
     "assets/images/Container1.png",
   ];
 
-
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        showSearch: true,
-        showCompare: true,
         onMenuPressed: () {
           print("Menu clicked");
         },
@@ -62,10 +57,7 @@ class HoneyPage extends StatelessWidget {
             // 🔶 Title
             Text(
               "New Products",
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
 
             SizedBox(height: 5),
@@ -97,7 +89,7 @@ class HoneyPage extends StatelessWidget {
                 mainAxisSpacing: 10,
               ),
               itemBuilder: (context, index) {
-                return productCard();
+                return InkWell(child: productCard());
               },
             ),
             GridView.builder(
@@ -128,6 +120,7 @@ class HoneyPage extends StatelessWidget {
       ),
     );
   }
+
   // 🔶 Filter Button
   Widget filterButton(String text) {
     return Container(
@@ -165,11 +158,9 @@ class HoneyPage extends StatelessWidget {
                   right: 8,
                   child: Column(
                     children: [
-                      Icon(Icons.swap_horiz,
-                          color: Colors.blueGrey, size: 20),
+                      Icon(Icons.swap_horiz, color: Colors.blueGrey, size: 20),
                       SizedBox(height: 8),
-                      Icon(Icons.favorite,
-                          color: Colors.red, size: 20),
+                      Icon(Icons.favorite, color: Colors.red, size: 20),
                     ],
                   ),
                 ),
@@ -183,7 +174,7 @@ class HoneyPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: List.generate(
               5,
-                  (index) =>
+              (index) =>
                   Icon(Icons.star_border, color: Colors.orange, size: 16),
             ),
           ),
@@ -192,8 +183,7 @@ class HoneyPage extends StatelessWidget {
 
           Text(
             "EGP 120.00",
-            style:
-            TextStyle(fontWeight: FontWeight.bold, color: Colors.orange),
+            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.orange),
           ),
 
           SizedBox(height: 5),
@@ -211,34 +201,32 @@ class HoneyPage extends StatelessWidget {
 
           Text(
             "20% OFF",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.grey,
-            ),
+            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey),
           ),
 
           SizedBox(height: 5),
 
-          Container(
-            width: double.infinity,
-            padding: EdgeInsets.symmetric(vertical: 6),
-            decoration: BoxDecoration(
-              color: Color(0xFFE2A331),
-              borderRadius: BorderRadius.circular(5),
-            ),
-            child: Center(
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(Icons.shopping_cart,
-                      color: Colors.white, size: 16),
-                  SizedBox(width: 5),
-                  Text(
-                    "Add to cart",
-                    style:
-                    TextStyle(color: Colors.white, fontSize: 12),
-                  ),
-                ],
+          InkWell(
+            onTap: () {},
+            child: Container(
+              width: double.infinity,
+              padding: EdgeInsets.symmetric(vertical: 6),
+              decoration: BoxDecoration(
+                color: Color(0xFFE2A331),
+                borderRadius: BorderRadius.circular(5),
+              ),
+              child: Center(
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.shopping_cart, color: Colors.white, size: 16),
+                    SizedBox(width: 5),
+                    Text(
+                      "Add to cart",
+                      style: TextStyle(color: Colors.white, fontSize: 12),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

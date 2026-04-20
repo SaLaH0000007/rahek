@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rahek/features/cart/presentation/ui/cart_screen.dart';
-import '../../../../../core/theme/app_colors_light.dart';
-import '../../../../product_details/presentation/ui/product_details.dart';
-import '../../bloc/bottom_navigation_cubit.dart';
-import '../../bloc/bottom_navigation_state.dart';
+import '../../theme/app_colors_light.dart';
+import '../../../features/product_details/presentation/ui/product_details.dart';
+import '../../../features/home/presentation/bloc/bottom_navigation_cubit.dart';
+import '../../../features/home/presentation/bloc/bottom_navigation_state.dart';
 
 class MainLayoutScreen extends StatelessWidget {
   MainLayoutScreen({super.key});
