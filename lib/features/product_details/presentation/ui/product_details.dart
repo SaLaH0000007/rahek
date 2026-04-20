@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rahek/features/product_details/presentation/ui/widgets/app_bar.dart';
 import 'package:rahek/features/product_details/presentation/ui/widgets/features_container.dart';
 import 'package:rahek/features/product_details/presentation/ui/widgets/imageGallery.dart';
 import 'package:rahek/features/product_details/presentation/ui/widgets/weight.dart';
@@ -10,37 +9,41 @@ import '../../../../../core/theme/app_colors_light.dart';
 import '../../../../../core/theme/app_sizes.dart';
 import '../../../../../core/widgets/primary_button.dart';
 import '../../../../../core/widgets/quantity_selector.dart';
+import '../../../../core/widgets/custom_appbar.dart';
 import '../../../cart/presentation/bloc/cart_cubit.dart';
 import '../bloc/product_details_cubit.dart';
 import '../bloc/product_details_state.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
-  final int productId; // ضفنا ده عشان نعرف إحنا فاتحين أنهي منتج
+  final int productId;
 
   const ProductDetailsScreen({super.key, required this.productId});
 
   @override
   Widget build(BuildContext context) {
-    // بنعمل Provide للـ Cubit ونشغل دالة getProductDetails أول ما الصفحة تفتح
     return BlocProvider(
       create: (context) => ProductDetailsCubit()..loadProduct(productId),
       child: Scaffold(
         backgroundColor: AppColors.background,
         appBar:
-            app_bar(), // يفضل تخليها AppBar عادية أو widget مباصي ليها داتا لو محتاج
+            CustomAppBar(), // تأكد من أن app_bar يستقبل AppColors/AppSizes أيضاً
         body: BlocBuilder<ProductDetailsCubit, ProductDetailsState>(
           builder: (context, state) {
-            // 1. حالة التحميل
             if (state is ProductDetailsLoading) {
-              return const Center(child: CircularProgressIndicator());
+              return const Center(
+                child: CircularProgressIndicator(color: AppColors.primary),
+              );
             }
 
-            // 2. حالة الإيرور
             if (state is ProductDetailsError) {
-              return Center(child: Text(state.message));
+              return Center(
+                child: Text(
+                  state.message,
+                  style: const TextStyle(color: AppColors.error),
+                ),
+              );
             }
 
-            // 3. حالة النجاح وعرض الداتا
             if (state is ProductDetailsLoaded) {
               final product = state.product;
               final cubit = ProductDetailsCubit.get(context);
@@ -50,7 +53,6 @@ class ProductDetailsScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // معرض الصور الديناميكي
                     imageGallery(
                       imagePath: product.image,
                       isFavorite: product.isFavorite,
@@ -58,7 +60,6 @@ class ProductDetailsScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: AppSizes.p16),
 
-                    // معلومات المنتج الديناميكية
                     product_info(
                       name: product.name,
                       price: product.price,
@@ -68,7 +69,6 @@ class ProductDetailsScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: AppSizes.p16),
 
-                    // الموقع والوزن (اختيار تفاعلي)
                     location_and_weight(
                       weights: product.weight,
                       selectedWeight: state.selectedWeight,
@@ -76,7 +76,7 @@ class ProductDetailsScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: AppSizes.p24),
 
-                    // التحكم في الكمية وأزرار الشراء
+                    // Quantity control and purchase buttons
                     Row(
                       children: [
                         QuantitySelector(
@@ -100,6 +100,9 @@ class ProductDetailsScreen extends StatelessWidget {
                                 SnackBar(
                                   content: Text(
                                     '${product.name} added to cart',
+                                    style: const TextStyle(
+                                      color: AppColors.background,
+                                    ),
                                   ),
                                   duration: const Duration(seconds: 2),
                                   backgroundColor: AppColors.primary,

@@ -1,13 +1,16 @@
 class AppSizes {
-  //ZERO
+  // ZERO
   static const double O = 0.0;
 
   // Padding & Margin (p)
+  static const double p2 = 2.0;
   static const double p4 = 4.0;
   static const double p8 = 8.0;
   static const double p12 = 12.0;
+  static const double p14 = 14.0;
   static const double p16 = 16.0;
   static const double p24 = 24.0;
+  static const double p32 = 32.0;
   static const double p35 = 35.0;
 
   // Font Sizes (f)
@@ -29,9 +32,21 @@ class AppSizes {
   // Specific Widget Sizes
   static const double galleryHeight = 300.0;
   static const double thumbnailSize = 60.0;
+  static const double bottomNavigationBarHeight = 71.0;
+
+  // Custom Sizes (s) للصور والعناصر المخصصة
+  static const double s32 = 32.0;
+  static const double s60 = 60.0;
+  static const double s80 = 80.0;
+
+  // Icons Sizes
+  static const double icon14 = 14.0;
   static const double iconSmall = 16.0;
+  static const double icon20 = 20.0;
   static const double iconMedium = 24.0;
   static const double iconLarge = 28.0;
+
+  // Buttons & Banners
   static const double buttonHeight = 48.0;
   static const double promoBannerHeight = 100.0;
 }

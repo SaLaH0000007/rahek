@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rahek/features/product_details/data/models/product.dart';
 import 'package:rahek/features/product_details/presentation/bloc/product_details_state.dart';
-import 'package:rahek/features/product_details/data/models/list.dart';
+import 'package:rahek/core/shared/list.dart';
 
 class ProductDetailsCubit extends Cubit<ProductDetailsState> {
   ProductDetailsCubit() : super(ProductDetailsInitial());

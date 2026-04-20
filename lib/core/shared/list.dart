@@ -12,7 +12,7 @@ List<Product> products = [
     weight: [275],
   ),
   Product(
-    id: 4,
+    id: 2,
     name: "Honey with black seed extract",
     image: "assets/images/Honey_with_black_seed_extract.png",
     price: 175.00,
@@ -22,7 +22,7 @@ List<Product> products = [
     weight: [1000, 500, 250],
   ),
   Product(
-    id: 5,
+    id: 3,
     name: "Black honey",
     image: "assets/images/Black_honey.png",
     price: 55.00,
@@ -32,7 +32,7 @@ List<Product> products = [
     weight: [660, 340],
   ),
   Product(
-    id: 6,
+    id: 4,
     name: "Orange blossom water 275 ml",
     image: "assets/images/Orange_blossom_water_275_ml.png",
     price: 25,
@@ -42,7 +42,7 @@ List<Product> products = [
     weight: [275],
   ),
   Product(
-    id: 8,
+    id: 5,
     name: "Dark soy sauce 280ml",
     image: "assets/images/Dark_soy_sauce_280ml.png",
     price: 60,
@@ -52,7 +52,7 @@ List<Product> products = [
     weight: [280],
   ),
   Product(
-    id: 9,
+    id: 6,
     name: "Date molasses",
     image: "assets/images/Date_molasses.png",
     price: 80,
@@ -62,7 +62,7 @@ List<Product> products = [
     weight: [350],
   ),
   Product(
-    id: 11,
+    id: 7,
     name: "Dried molokhia",
     image: "assets/images/Dried_molokhia.png",
     price: 35,
@@ -71,21 +71,21 @@ List<Product> products = [
     rating: 5,
   ),
   Product(
-    id: 12,
+    id: 8,
     name: "Egyptian Mountain Sidr Honey (100% Natural)",
-    image: "assets/images/Egyptian_Mountain_Sidr_Honey.png",
+    image: "assets/images/Egyptian_Mountain_Sidr_Honey__100__Natural.png",
     price: 550,
     description:
         "Egyptian Mountain Sidr Honey: High-quality Sidr honey is one of the best choices for liver, kidney, and heart health. It also promotes overall well-being, offering comprehensive and natural health benefits. Description: It is produced by bees feeding on the nectar of Sidr tree blossoms and mountain herbs in the mountains and southern Egypt. This honey contains, on average, more than 18 times the antioxidants found in regular honey.",
     rating: 4.2,
   ),
-  Product(
-    id: 14,
-    name: "extra virgin olive oil",
-    image: "assets/images/extra_virgin_olive_oil.png",
-    price: 650,
-    description:
-        "This is considered one of the finest types of olive oil and is essential in your kitchen. It contains high levels of vitamins and antioxidants, and you can use it in your dishes as a substitute for harmful and refined oils. Uses: Add it to salads and all kinds of dishes to boost immunity and reduce the risk of chronic diseases. Regular consumption also helps to: protect the body from aging, inflammation, and the formation of cancerous cells; lower bad cholesterol and prevent blood clots; improve heart and brain health and protect against strokes; regulate blood sugar levels; promote healthy skin, hair, and bones; and prevent digestive problems and constipation.",
-    rating: 4.1,
-  ),
+  // Product(
+  //   id: 9,
+  //   name: "extra virgin olive oil",
+  //   image: "assets/images/extra_virgin_olive_oil.png",
+  //   price: 650,
+  //   description:
+  //       "This is considered one of the finest types of olive oil and is essential in your kitchen. It contains high levels of vitamins and antioxidants, and you can use it in your dishes as a substitute for harmful and refined oils. Uses: Add it to salads and all kinds of dishes to boost immunity and reduce the risk of chronic diseases. Regular consumption also helps to: protect the body from aging, inflammation, and the formation of cancerous cells; lower bad cholesterol and prevent blood clots; improve heart and brain health and protect against strokes; regulate blood sugar levels; promote healthy skin, hair, and bones; and prevent digestive problems and constipation.",
+  //   rating: 4.1,
+  // ),
 ];

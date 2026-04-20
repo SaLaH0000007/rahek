@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import '../../../../core/theme/app_colors_light.dart';
 import '../theme/app_sizes.dart';
 import 'icon_bottun.dart';
 
@@ -18,8 +18,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.white,
-      elevation: 0,
+      backgroundColor: AppColors.background,
+      elevation: AppSizes.O,
       automaticallyImplyLeading: false,
       titleSpacing: AppSizes.p16,
 
@@ -30,10 +30,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               customIconButton(Icons.menu, onMenuPressed),
-
               const SizedBox(width: AppSizes.p16),
               customIconButton(Icons.swap_horiz, onComparePressed),
-
               const SizedBox(width: AppSizes.p16),
               customIconButton(Icons.search, onSearchPressed),
             ],
