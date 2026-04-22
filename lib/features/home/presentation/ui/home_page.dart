@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rahek/features/home/presentation/ui/screens/widgets/side_menu_widget.dart';
+import 'package:rahek/core/widgets/menu/ui/side_menu_widget.dart';
 import '../../../../core/shared/list.dart';
 import '../../../../core/widgets/custom_appbar.dart';
 import '../../../../core/theme/app_colors_light.dart';

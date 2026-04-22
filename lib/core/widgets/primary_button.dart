@@ -4,18 +4,20 @@ import '../theme/app_sizes.dart';
 
 class PrimaryButton extends StatelessWidget {
   final String text;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed; // لو null الزرار هيبقى رمادي
 
-  const PrimaryButton({super.key, required this.text, required this.onPressed});
+  const PrimaryButton({super.key, required this.text, this.onPressed});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
+      width: double.infinity,
       height: AppSizes.buttonHeight,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.primary,
-          elevation: 0,
+          disabledBackgroundColor: AppColors.border,
+          elevation: AppSizes.O,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppSizes.r8),
           ),
@@ -24,9 +26,11 @@ class PrimaryButton extends StatelessWidget {
         child: Text(
           text,
           style: TextStyle(
-            fontSize: AppSizes.f13,
-            color: AppColors.background,
+            color: onPressed == null
+                ? AppColors.textSecondary
+                : AppColors.background,
             fontWeight: FontWeight.bold,
+            fontSize: AppSizes.f16,
           ),
         ),
       ),

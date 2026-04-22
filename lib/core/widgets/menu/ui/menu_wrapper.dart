@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../features/home/presentation/ui/screens/widgets/side_menu_widget.dart';
+import 'side_menu_widget.dart';
 import '../bloc/menu_cubit.dart';
 import '../bloc/menu_state.dart';
 

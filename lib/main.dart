@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:rahek/features/auth/presentation/bloc/login_cubit.dart';
+import 'package:rahek/features/auth/presentation/bloc/register_cubit.dart';
 import 'core/theme/app_colors_light.dart';
 import 'core/widgets/bottom_navigation/bloc/bottom_navigation_cubit.dart';
+import 'features/auth/presentation/bloc/global_auth_cubit.dart';
 import 'features/cart/presentation/bloc/cart_cubit.dart';
 import 'features/home/presentation/bloc/home_cubit.dart';
 import 'features/product_details/presentation/bloc/product_details_cubit.dart';
@@ -24,6 +27,7 @@ class RahekApp extends StatelessWidget {
         BlocProvider(create: (context) => CartCubit()..loadCart()),
         BlocProvider(create: (context) => HomeCubit()),
         BlocProvider(create: (context) => BottomNavigationCubit()),
+        BlocProvider(create: (context) => GlobalAuthCubit()),
       ],
       child: ScreenUtilInit(
         designSize: const Size(375, 812), // مقاس التصميم المبدئي (Figma)
