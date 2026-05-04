@@ -1,38 +1,31 @@
+// main.dart
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'core/theme/app_colors_light.dart';
-import 'features/cart/presentation/bloc/cart_cubit.dart';
-import 'features/home/presentation/bloc/bottom_navigation_cubit.dart';
-import 'features/product_details/presentation/bloc/product_details_cubit.dart';
-import 'core/widgets/bottom_navigation/main_layout_screen.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-void main() {
+import 'features/completed/presentation/ui/order_success_page.dart';
+import 'features/orders/presentation/ui/review_order_screen.dart';
+
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const RahekApp());
+  runApp(const MyApp());
 }
 
-class RahekApp extends StatelessWidget {
-  const RahekApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (context) => ProductDetailsCubit()),
-        BlocProvider(create: (context) => CartCubit()..loadCart()),
-        BlocProvider(create: (context) => BottomNavigationCubit()),
-      ],
-      child: MaterialApp(
-        title: 'Rahek',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          useMaterial3: true,
-          scaffoldBackgroundColor: AppColors.background,
-          primaryColor: AppColors.primary,
-          colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primary),
-        ),
-        home: MainLayoutScreen(),
-      ),
+    return ScreenUtilInit(
+      designSize: const Size(360, 690), // تأكد من المقاس الصحيح للتصميم
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          home: child, // هذا يضمن أن الصفحة لن تترسم إلا بعد جاهزية ScreenUtil
+        );
+      },
+      child: const OrderSuccessPage(),
     );
   }
 }
