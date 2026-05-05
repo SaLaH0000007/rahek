@@ -5,9 +5,13 @@ import 'package:rahek/features/auth/presentation/bloc/login_cubit.dart';
 import 'package:rahek/features/auth/presentation/bloc/register_cubit.dart';
 import 'core/theme/app_colors_light.dart';
 import 'core/widgets/bottom_navigation/bloc/bottom_navigation_cubit.dart';
+import 'core/widgets/menu/bloc/menu_cubit.dart';
 import 'features/auth/presentation/bloc/global_auth_cubit.dart';
 import 'features/cart/presentation/bloc/cart_cubit.dart';
+import 'features/checkout/presentation/bloc/checkout_cubit.dart';
+import 'features/completed/presentation/bloc/order_success_cubit.dart';
 import 'features/home/presentation/bloc/home_cubit.dart';
+import 'features/orders/presentation/bloc/cubit.dart';
 import 'features/product_details/presentation/bloc/product_details_cubit.dart';
 import 'core/widgets/bottom_navigation/ui/main_layout_screen.dart';
 
@@ -28,6 +32,10 @@ class RahekApp extends StatelessWidget {
         BlocProvider(create: (context) => HomeCubit()),
         BlocProvider(create: (context) => BottomNavigationCubit()),
         BlocProvider(create: (context) => GlobalAuthCubit()),
+        BlocProvider(create: (context) => CheckoutCubit()),
+        BlocProvider(create: (context) => OrderSuccessCubit()),
+        BlocProvider(create: (context) => ReviewOrderCubit()),
+        BlocProvider(create: (context) => MenuCubit()),
       ],
       child: ScreenUtilInit(
         designSize: const Size(375, 812), // مقاس التصميم المبدئي (Figma)

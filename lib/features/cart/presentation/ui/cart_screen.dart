@@ -6,6 +6,7 @@ import '../../../../core/theme/app_colors_light.dart';
 import '../../../../core/widgets/menu/bloc/menu_cubit.dart';
 import '../../../../core/widgets/menu/bloc/menu_state.dart';
 import '../../../../core/widgets/menu/ui/menu_wrapper.dart';
+import '../../../checkout/presentation/ui/checkout_page.dart';
 import '../bloc/cart_cubit.dart';
 import '../bloc/cart_state.dart';
 import 'widgets/cart_item_widget.dart';
@@ -144,7 +145,12 @@ class CartScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(AppSizes.r4),
               ),
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ReviewOrderPage()),
+              );
+            },
             child: const Text(
               'CONTINUE SHOPPING',
               style: TextStyle(
